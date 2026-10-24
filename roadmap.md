@@ -12,4 +12,5 @@
 - [ ] On-device encryption, zero-knowledge sync, device-backed keys
 - [ ] Biometrics, hardware keys, passkeys, auto-lock, session revocation, key rotation
 - [ ] Real accounts/auth, decoy service, device check-ins, Find Nearby, tamper-evident log
+- [x] Incident notes → AI timeline (built, disabled until owner sets INCIDENT_AI_ENABLED=true and authorizes AI Gateway)
 - [ ] Billing (blocked: owner says no paid services yet)

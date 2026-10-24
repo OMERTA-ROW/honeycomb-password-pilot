@@ -7,6 +7,7 @@ const nav = [
   { to: "/honey-pack", label: "Digital Honey Pack" },
   { to: "/recovery", label: "Recovery" },
   { to: "/devices", label: "Devices" },
+  { to: "/incident-notes", label: "Incident notes" },
   { to: "/evidence", label: "Evidence export" },
   { to: "/roadmap", label: "Roadmap & pricing" },
 ] as const;
