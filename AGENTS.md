@@ -8,3 +8,6 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Honeycomb Vault preview logic is simulation-only: password-batch rules live in src/lib/batch.ts (pure, unit-tested) and sample data in src/lib/sample-data.ts — keeps real credential handling out until native/crypto work is reviewed.
+- Spec lives in SPEC.md and the checklist in roadmap.md — owner requires an honest record of working vs mocked vs unbuilt.
