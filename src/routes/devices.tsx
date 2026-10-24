@@ -28,7 +28,10 @@ function Page() {
         <p className="text-foreground font-medium">Locate / Find Nearby feasibility</p>
         <p>• Depends on OS permissions, UWB/Bluetooth hardware. 5–10 ft precision is a test goal, not a promise.</p>
         <p>• No guaranteed tracking when offline or powered off, after factory reset, or on devices where the app wasn't installed beforehand.</p>
-        <p>• No access to Apple/Google Find My data. VPN/proxy-masked IPs cannot be unmasked.</p>
+        <p>• Check-ins only happen when the installed app can run and reconnect; background reporting is never guaranteed. Last known location is kept and marked stale.</p>
+        <p>• Offline location would need a supported relay network. An old IP cannot locate a disconnected device.</p>
+        <p>• No access to Apple Find My data. VPNs/proxies can mask the address; an early direct check-in may capture an earlier one, but there is no guaranteed unmasked window.</p>
+        <p>• The device must be enrolled before it is lost.</p>
       </div>
     </VaultShell>
   );

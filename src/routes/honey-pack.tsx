@@ -29,6 +29,8 @@ function Page() {
         <p>• False positives happen (security scanners, shared networks, your own tests).</p>
         <p>• A stolen offline copy used without contacting our service cannot be detected.</p>
         <p>• An IP address does not identify a person.</p>
+        <p>• A decoy being used does not by itself prove theft, malicious intent, or who did it — investigate before concluding.</p>
+        <p>• No unauthorized spreading and no damage to your data. Alert evidence is planned to be stored separately from any missing device.</p>
       </div>
     </VaultShell>
   );
