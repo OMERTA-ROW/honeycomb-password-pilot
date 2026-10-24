@@ -27,7 +27,8 @@ export const organizeIncidentNotes = createServerFn({ method: "POST" })
     });
     try {
       const result = streamText({
-        model: provider.responses("openai/gpt-6-astra"),
+        // Cast: duplicate nested @ai-sdk/provider typings in the shared install; runtime is identical.
+        model: provider.responses("openai/gpt-6-astra") as unknown as Parameters<typeof streamText>[0]["model"],
         instructions: INSTRUCTIONS,
         messages: [{ role: "user", content: data.notes }],
         output: Output.object({ schema: timelineSchema }),
