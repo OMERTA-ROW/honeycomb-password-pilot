@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { VaultShell, PageHead, meta } from "@/components/VaultShell";
 import { sampleAccounts } from "@/lib/sample-data";
 import { runBatch, itemReady, recoveryGuidance, generatePassword, type BatchItem, type Outcome, type GenPrefs } from "@/lib/batch";
@@ -19,6 +19,8 @@ function Accounts() {
   const [mfa, setMfa] = useState<Set<string>>(new Set());
   const [result, setResult] = useState<Record<string, Outcome>>({});
   const chosen = Object.values(items);
+  const [sample, setSample] = useState("");
+  useEffect(() => setSample(generatePassword(prefs).slice(0, 10)), [prefs]);
 
   const toggle = (id: string) => setItems((s) => {
     const n = { ...s };
@@ -42,7 +44,7 @@ function Accounts() {
                 onChange={(e) => setPrefs({ ...prefs, length: +e.target.value })} className="w-16 rounded border bg-background px-2 py-1" />
             </label>
             <label className="flex items-center gap-2"><input type="checkbox" checked={prefs.symbols} onChange={(e) => setPrefs({ ...prefs, symbols: e.target.checked })} />Symbols</label>
-            <span className="font-mono text-xs text-muted-foreground">e.g. {generatePassword(prefs).slice(0, 10)}…</span>
+            <span className="font-mono text-xs text-muted-foreground">e.g. {sample}…</span>
           </div>
           <ul className="space-y-2">
             {sampleAccounts.map((a) => {
