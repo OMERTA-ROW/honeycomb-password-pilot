@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { VaultShell, PageHead, meta } from "@/components/VaultShell";
 import { sampleAccounts } from "@/lib/sample-data";
-import { runBatch, itemIssues, recoveryGuidance, generateReplacement, type BatchItem, type Outcome, type GenPrefs } from "@/lib/batch";
+import { runBatch, itemIssues, recoveryGuidance, generateReplacement, type BatchItem, type Outcome, type GenPrefs, type GenStyle } from "@/lib/batch";
 
 export const Route = createFileRoute("/accounts")({
   head: () => meta("Password batches", "Guided, simulated password update batches with MFA pauses and verification."),
@@ -39,7 +39,7 @@ function Accounts() {
         <>
           <div className="panel mb-4 flex flex-wrap items-center gap-4 text-sm">
             <span className="text-muted-foreground">Generation preferences:</span>
-            <select aria-label="Style" value={prefs.style} onChange={(e) => setPrefs({ ...prefs, style: e.target.value as GenPrefs["style"] })} className="rounded border bg-background px-2 py-1">
+            <select aria-label="Style" value={prefs.style} onChange={(e) => setPrefs({ ...prefs, style: e.target.value as GenStyle })} className="rounded border bg-background px-2 py-1">
               <option value="random">Random characters</option>
               <option value="passphrase">Passphrase</option>
             </select>
