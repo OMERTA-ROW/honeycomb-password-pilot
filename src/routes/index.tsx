@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { VaultShell, PageHead, Hex, meta } from "@/components/VaultShell";
+import { VaultShell, Hex, meta } from "@/components/VaultShell";
 import { sampleAccounts, sampleDevices } from "@/lib/sample-data";
 
 export const Route = createFileRoute("/")({
@@ -11,7 +11,7 @@ function Index() {
   const stale = sampleDevices.filter((d) => d.stale).length;
   return (
     <VaultShell showPromo>
-      <section className="panel flex flex-col gap-4 md:flex-row md:items-center">
+      <section className="panel mb-4 flex flex-col gap-4 md:flex-row md:items-center">
         <Hex className="h-14 w-14 text-primary" />
         <div className="flex-1">
           <p className="text-xs uppercase tracking-widest text-muted-foreground">Vault status</p>
@@ -20,7 +20,6 @@ function Index() {
         </div>
         <Link to="/accounts" className="btn-primary">Start a password update batch →</Link>
       </section>
-      <PageHead title="" sub="" />
       <div className="grid gap-4 md:grid-cols-3">
         <Card title="Devices" value={`${sampleDevices.length} enrolled`} note={stale ? `${stale} stale check-in` : "All current"} to="/devices" />
         <Card title="Digital Honey Pack" value="1 decoy alert" note="Review observed events" to="/honey-pack" />
