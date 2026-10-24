@@ -23,6 +23,9 @@ function Page() {
       <div className="panel text-sm text-muted-foreground space-y-1">
         <p className="text-foreground font-medium">What this can and can't do</p>
         <p>• Revokes <em>future</em> vault access for the lost device. Secrets already seen cannot be recalled — change them.</p>
+        <p>• Covers phones, iPads and computers only through capabilities each platform supports. Normal app permissions do not give whole-device remote control.</p>
+        <p>• Vault data already on the lost device is meant to stay protected by local encryption and auto-lock (not built yet).</p>
+        <p>• No automatic data destruction on suspicious activity.</p>
         <p>• Locking the device itself uses your OS provider (e.g. Apple Find My, Google Find My Device). We guide you there; we do not control the whole device.</p>
       </div>
     </VaultShell>

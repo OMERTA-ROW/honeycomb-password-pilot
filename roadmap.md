@@ -6,6 +6,13 @@
 - [x] Honey Pack, Recovery, Devices, Evidence screens (mock data, limits disclosed)
 - [x] Roadmap/pricing page (proposed only), discreet Terminal card outside security flows
 
+- [x] Gap checklist vs canonical plan (docs/GAP_CHECKLIST.md); unique/variation checks, passphrase option, missing-records category, added limits text
+- [x] Sign-in/encryption/recovery plan (docs/PLAN_AUTH_CRYPTO.md)
+
+## Blocked on owner input
+- [ ] Answers to the 9 owner inputs in docs/PLAN_AUTH_CRYPTO.md §8
+- [ ] Authorization for Lovable Cloud (sign-in/database) and for AI incident notes
+
 ## Not implemented (needs native/security work + independent review)
 - [ ] Desktop browser extension / companion
 - [ ] Mobile autofill

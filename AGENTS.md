@@ -12,3 +12,4 @@
 - Honeycomb Vault preview logic is simulation-only: password-batch rules live in src/lib/batch.ts (pure, unit-tested) and sample data in src/lib/sample-data.ts — keeps real credential handling out until native/crypto work is reviewed.
 - Spec lives in SPEC.md and the checklist in roadmap.md — owner requires an honest record of working vs mocked vs unbuilt.
 - Incident-notes AI is gated server-side by INCIDENT_AI_ENABLED and notes are screened for secrets in both browser and server (src/lib/incident-notes.ts) — owner must authorize the AI service; notes are never logged.
+- Docs: docs/GAP_CHECKLIST.md tracks each canonical requirement status; docs/PLAN_AUTH_CRYPTO.md is the gated security plan — update both when scope changes; no custom crypto, vetted libraries only.

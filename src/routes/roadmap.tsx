@@ -7,8 +7,8 @@ export const Route = createFileRoute("/roadmap")({
 });
 
 const working = ["Responsive preview shell and branding", "Simulated batch flow: per-account replacement, generator preferences, preview/authorize, MFA pause, verification, outcome report", "Sample evidence file download"];
-const mocked = ["Digital Honey Pack alerts", "Recovery actions", "Device check-ins and locations", "Vault lock status"];
-const notBuilt = ["Desktop browser extension / companion (first priority)", "Mobile autofill where feasible", "On-device encryption; encrypted sync the server cannot decrypt", "Device-backed keys, biometrics, hardware keys, passkeys", "Stronger export & new-device verification, auto-lock, session revocation, key rotation", "Find Nearby (OS/UWB dependent)", "Tamper-evident event chain", "Accounts, billing, real decoy service"];
+const mocked = ["Vault unlock state (shows Locked; no unlock exists)", "Digital Honey Pack alerts", "Recovery actions", "Device check-ins and locations", "Vault lock status"];
+const notBuilt = ["Desktop browser extension / companion (first priority)", "Mobile autofill where feasible", "On-device encryption; encrypted sync the server cannot decrypt", "Device-backed keys, biometrics, hardware keys, passkeys", "Stronger export & new-device verification, auto-lock, session revocation, key rotation", "Find Nearby (OS/UWB dependent)", "Tamper-evident event chain", "Real sign-in, vault unlock and connecting account sources", "Real password changes on any website (first target: a small set of explicitly supported desktop sites)", "Accounts, billing, real decoy service"];
 
 function List({ title, items, tag }: { title: string; items: string[]; tag: string }) {
   return <div className="panel"><h2 className="mb-2 flex items-center gap-2 font-medium">{title}<span className={tag}>{items.length}</span></h2><ul className="space-y-1 text-sm text-muted-foreground">{items.map((i) => <li key={i}>• {i}</li>)}</ul></div>;
@@ -29,7 +29,7 @@ function Page() {
         <div className="panel"><p className="font-medium">Household</p><p className="text-xl text-primary">$9.99/mo · $99/yr</p><p className="text-muted-foreground">6 private vaults, 30 devices</p></div>
         <div className="panel"><p className="font-medium">VPN add-on</p><p className="text-xl text-muted-foreground">$7.99/mo · $79/yr</p><p className="text-muted-foreground">Possible later, subject to costs. Outside initial core.</p></div>
       </div>
-      <p className="mt-4 text-xs text-muted-foreground">No universal site control and no Google Password Manager write-back are assumed. Malwarebytes: affiliate interest only — no partnership, link, or bundle exists.</p>
+      <p className="mt-4 text-xs text-muted-foreground">Name, domain and trademark are not cleared. Prices are proposals, not launched plans or validated margins (audits, support, storage, fees and acquisition costs not yet costed). No universal site control and no Google Password Manager write-back are assumed. Malwarebytes: affiliate interest only — no application, partnership, tracked link, or bundle exists; bundling would need reseller terms. Malware scanning is outside the core build. Parrot Security OS is a possible test environment, not a security guarantee. No product is "unhackable".</p>
     </VaultShell>
   );
 }

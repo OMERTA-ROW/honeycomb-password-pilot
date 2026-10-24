@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { VaultShell, PageHead, meta } from "@/components/VaultShell";
 import { sampleAccounts } from "@/lib/sample-data";
-import { runBatch, itemReady, recoveryGuidance, generatePassword, type BatchItem, type Outcome, type GenPrefs } from "@/lib/batch";
+import { runBatch, itemIssues, recoveryGuidance, generateReplacement, type BatchItem, type Outcome, type GenPrefs, type GenStyle } from "@/lib/batch";
 
 export const Route = createFileRoute("/accounts")({
   head: () => meta("Password batches", "Guided, simulated password update batches with MFA pauses and verification."),
@@ -15,12 +15,12 @@ const tagFor: Record<Outcome, string> = { completed: "tag-ok", waiting: "tag-inf
 function Accounts() {
   const [step, setStep] = useState<Step>("select");
   const [items, setItems] = useState<Record<string, BatchItem>>({});
-  const [prefs, setPrefs] = useState<GenPrefs>({ length: 20, symbols: true });
+  const [prefs, setPrefs] = useState<GenPrefs>({ style: "random", length: 20, symbols: true, words: 5 });
   const [mfa, setMfa] = useState<Set<string>>(new Set());
   const [result, setResult] = useState<Record<string, Outcome>>({});
   const chosen = Object.values(items);
   const [sample, setSample] = useState("");
-  useEffect(() => setSample(generatePassword(prefs).slice(0, 10)), [prefs]);
+  useEffect(() => setSample(generateReplacement(prefs).slice(0, 18)), [prefs]);
 
   const toggle = (id: string) => setItems((s) => {
     const n = { ...s };
@@ -39,11 +39,23 @@ function Accounts() {
         <>
           <div className="panel mb-4 flex flex-wrap items-center gap-4 text-sm">
             <span className="text-muted-foreground">Generation preferences:</span>
-            <label className="flex items-center gap-2">Length
-              <input type="number" min={12} max={64} value={prefs.length} aria-label="Length"
-                onChange={(e) => setPrefs({ ...prefs, length: +e.target.value })} className="w-16 rounded border bg-background px-2 py-1" />
-            </label>
+            <select aria-label="Style" value={prefs.style} onChange={(e) => setPrefs({ ...prefs, style: e.target.value as GenStyle })} className="rounded border bg-background px-2 py-1">
+              <option value="random">Random characters</option>
+              <option value="passphrase">Passphrase</option>
+            </select>
+            {prefs.style === "passphrase" ? (
+              <label className="flex items-center gap-2">Words
+                <input type="number" min={4} max={10} value={prefs.words} aria-label="Words"
+                  onChange={(e) => setPrefs({ ...prefs, words: +e.target.value })} className="w-16 rounded border bg-background px-2 py-1" />
+              </label>
+            ) : (
+              <label className="flex items-center gap-2">Length
+                <input type="number" min={12} max={64} value={prefs.length} aria-label="Length"
+                  onChange={(e) => setPrefs({ ...prefs, length: +e.target.value })} className="w-16 rounded border bg-background px-2 py-1" />
+              </label>
+            )}
             <label className="flex items-center gap-2"><input type="checkbox" checked={prefs.symbols} onChange={(e) => setPrefs({ ...prefs, symbols: e.target.checked })} />Symbols</label>
+            <span className="text-xs text-muted-foreground">Each account gets its own independent value.</span>
             <span className="font-mono text-xs text-muted-foreground">e.g. {sample}…</span>
           </div>
           <ul className="space-y-2">
@@ -65,7 +77,7 @@ function Accounts() {
                         <option value="manual">Enter my own</option>
                       </select>
                       {it.mode === "manual" && (
-                        <input type="password" placeholder="Sample only, 12+ chars" autoComplete="off" value={it.manualValue ?? ""}
+                        <input type="password" placeholder="Sample only — not a real password" autoComplete="off" value={it.manualValue ?? ""}
                           onChange={(e) => setItems({ ...items, [a.id]: { ...it, manualValue: e.target.value } })}
                           className="rounded border bg-background px-2 py-1" />
                       )}
@@ -85,7 +97,7 @@ function Accounts() {
           <ul className="space-y-1 text-sm">
             {chosen.map((it) => {
               const a = sampleAccounts.find((x) => x.id === it.accountId)!;
-              return <li key={it.accountId}>• {a.site} — {it.mode === "generate" ? `generated (${prefs.length} chars)` : "your own value"} {!itemReady(it) && <span className="tag-bad">too short</span>}</li>;
+              return <li key={it.accountId}>• {a.site} — {it.mode === "generate" ? (prefs.style === "passphrase" ? `unique passphrase (${prefs.words} words)` : `unique generated (${prefs.length} chars)`) : "your own value"} {itemIssues(it, chosen).map((x) => <span key={x} className="tag-bad ml-1">{x}</span>)}</li>;
             })}
           </ul>
           <p className="text-xs text-muted-foreground">Authorizing starts a simulated run. Items are marked completed only after (simulated) verification.</p>

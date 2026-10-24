@@ -25,3 +25,16 @@ describe("runBatch", () => {
     expect(generatePassword({ length: 4, symbols: false })).toHaveLength(12);
   });
 });
+
+import { manualIssues, generatePassphrase } from "./batch";
+describe("unique, non-predictable replacements", () => {
+  const v = "Kp7-meadow-Rq9x";
+  it("same manual value on two accounts fails both", () => {
+    const r = runBatch(accts, [{ accountId: "a", mode: "manual", manualValue: v }, { accountId: "d", mode: "manual", manualValue: v }], new Set());
+    expect(r["a"]).toBe("failed");
+  });
+  it("flags predictable variation", () => expect(manualIssues("SummerHoney2025!", ["SummerHoney2024!"])).toContain("predictable variation"));
+  it("flags common weak words", () => expect(manualIssues("MyPassword!2026x", [])).toContain("weak pattern"));
+  it("accepts an independent strong value", () => expect(manualIssues(v, ["Other-ridge-77Zq"])).toEqual([]));
+  it("passphrase honours word count", () => expect(generatePassphrase({ length: 0, symbols: true, words: 6 }).split("-")).toHaveLength(6));
+});
