@@ -1,6 +1,6 @@
 # Honeycomb Vault — Project Specification
 
-Separate product from Honeycomb Terminal and Omni/Evolution. Canonical owner plan: https://app.notion.com/p/403c1161030681438741f869fd1244d6 (not read by the agent — private page; this spec is from the owner's brief).
+Separate product from Honeycomb Terminal and Omni/Evolution. Canonical owner plan: https://app.notion.com/p/403c1161030681438741f869fd1244d6 Full content was pasted by the owner on 2026-10-24 and compared requirement-by-requirement in docs/GAP_CHECKLIST.md. Planning resumed by owner request (previously paused).
 
 ## Constraints
 - Private, unpublished preview. No deploy, public sharing, subscriptions, or paid services.
@@ -27,3 +27,14 @@ Individual $4.99/mo or $49/yr (1 user, 10 devices). Household $9.99/mo or $99/yr
 
 ## Cross-promotion
 Optional discreet Terminal card in Vault menu/companion only; never inside security/password/recovery flows. No Vault ads in Terminal.
+
+## Added from canonical plan (2026-10-24)
+- Purpose: make changing compromised, weak or reused passwords simple enough to finish.
+- Unique independent password per account; no shared pool; flag weak choices and predictable variations; generation prefs include passphrase length and permitted characters.
+- Verify and preserve access before marking complete.
+- Initial scope: small set of explicitly supported desktop websites first.
+- Evidence report also lists **missing records**. No legal representation, insurance or reimbursement without separate partners.
+- No automatic data destruction; no unauthorized propagation; evidence kept apart from missing device.
+- Name/domain/trademark unverified. Pricing not validated (audit, support, storage, fees, acquisition uncosted). Terminal priced separately ($20/yr) in its own plan.
+- Parrot Security OS = possible test environment only; Ghost/Dragon products unidentified.
+- Next foundations plan: docs/PLAN_AUTH_CRYPTO.md.
