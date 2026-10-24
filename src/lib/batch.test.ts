@@ -15,11 +15,11 @@ describe("runBatch", () => {
   });
   it("MFA account completes only after approval", () => {
     const r = runBatch(accts, [{ accountId: "b", mode: "generate" }], new Set(["b"]));
-    expect(r.b).toBe("completed");
+    expect(r["b"]).toBe("completed");
   });
   it("manual replacement shorter than 12 chars fails", () => {
     const r = runBatch(accts, [{ accountId: "a", mode: "manual", manualValue: "short" }], new Set());
-    expect(r.a).toBe("failed");
+    expect(r["a"]).toBe("failed");
   });
   it("generator enforces minimum length 12", () => {
     expect(generatePassword({ length: 4, symbols: false })).toHaveLength(12);
