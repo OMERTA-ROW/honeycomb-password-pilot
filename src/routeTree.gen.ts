@@ -20,6 +20,7 @@ import { Route as IncidentNotesRouteImport } from './routes/incident-notes'
 import { Route as RecoveryRouteImport } from './routes/recovery'
 import { Route as RoadmapRouteImport } from './routes/roadmap'
 import { Route as SecurityModelRouteImport } from './routes/security-model'
+import { Route as WalletProtectionRouteImport } from './routes/wallet-protection'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -76,6 +77,11 @@ const SecurityModelRoute = SecurityModelRouteImport.update({
   path: '/security-model',
   getParentRoute: () => rootRouteImport,
 } as any)
+const WalletProtectionRoute = WalletProtectionRouteImport.update({
+  id: '/wallet-protection',
+  path: '/wallet-protection',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -89,6 +95,7 @@ export interface FileRoutesByFullPath {
   '/recovery': typeof RecoveryRoute
   '/roadmap': typeof RoadmapRoute
   '/security-model': typeof SecurityModelRoute
+  '/wallet-protection': typeof WalletProtectionRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -102,6 +109,7 @@ export interface FileRoutesByTo {
   '/recovery': typeof RecoveryRoute
   '/roadmap': typeof RoadmapRoute
   '/security-model': typeof SecurityModelRoute
+  '/wallet-protection': typeof WalletProtectionRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -116,6 +124,7 @@ export interface FileRoutesById {
   '/recovery': typeof RecoveryRoute
   '/roadmap': typeof RoadmapRoute
   '/security-model': typeof SecurityModelRoute
+  '/wallet-protection': typeof WalletProtectionRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -131,6 +140,7 @@ export interface FileRouteTypes {
     | '/recovery'
     | '/roadmap'
     | '/security-model'
+    | '/wallet-protection'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -144,6 +154,7 @@ export interface FileRouteTypes {
     | '/recovery'
     | '/roadmap'
     | '/security-model'
+    | '/wallet-protection'
   id:
     | '__root__'
     | '/'
@@ -157,6 +168,7 @@ export interface FileRouteTypes {
     | '/recovery'
     | '/roadmap'
     | '/security-model'
+    | '/wallet-protection'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -171,6 +183,7 @@ export interface RootRouteChildren {
   RecoveryRoute: typeof RecoveryRoute
   RoadmapRoute: typeof RoadmapRoute
   SecurityModelRoute: typeof SecurityModelRoute
+  WalletProtectionRoute: typeof WalletProtectionRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -252,6 +265,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SecurityModelRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/wallet-protection': {
+      id: '/wallet-protection'
+      path: '/wallet-protection'
+      fullPath: '/wallet-protection'
+      preLoaderRoute: typeof WalletProtectionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -267,6 +287,7 @@ const rootRouteChildren: RootRouteChildren = {
   RecoveryRoute: RecoveryRoute,
   RoadmapRoute: RoadmapRoute,
   SecurityModelRoute: SecurityModelRoute,
+  WalletProtectionRoute: WalletProtectionRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
