@@ -96,18 +96,27 @@
 @utility tag-muted { @apply tag text-muted-foreground; }
 
 .hive-backdrop { position: fixed; inset: 0; overflow: hidden; z-index: 0; }
-.hive-edge { position: absolute; top: 0; width: 460px; height: 100%; opacity: 0.9; mask-image: linear-gradient(to right, black 45%, transparent 96%); }
+.hive-edge { position: absolute; top: 0; width: 520px; height: 100%; opacity: 1; mask-image: linear-gradient(to right, black 52%, transparent 97%); }
 .hive-edge-left { left: 0; }
 .hive-edge-right { right: 0; transform: scaleX(-1); }
-.hive-cell { stroke-width: 1.15; }
+.hive-cell { stroke-width: 1.5; }
+.hive-nodes { fill: var(--hive-gold-bright); }
 .hive-metal-deep { stop-color: var(--hive-gold-deep); }
 .hive-metal-soft { stop-color: var(--hive-gold-soft); }
 .hive-metal-bright { stop-color: var(--hive-gold-bright); }
-.vault-layout { position: relative; z-index: 1; }
-.vault-sidebar { background: color-mix(in oklab, var(--background) 45%, transparent); }
+.vault-frame-wrap { position: relative; z-index: 1; }
+.vault-frame { position: relative; }
+.vault-topbar { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; padding: 0.9rem 1.25rem; border-bottom: 1px solid color-mix(in oklab, var(--primary) 35%, transparent); }
+.vault-dots { display: inline-flex; gap: 0.45rem; }
+.vault-dots i { width: 0.6rem; height: 0.6rem; border-radius: 9999px; border: 1px solid color-mix(in oklab, var(--primary) 55%, transparent); background: color-mix(in oklab, var(--primary) 18%, transparent); }
+.vault-wordmark { font-weight: 600; letter-spacing: 0.32em; text-transform: uppercase; font-size: 0.95rem; color: var(--foreground); white-space: nowrap; }
+.vault-tagline { margin-left: auto; font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted-foreground); white-space: nowrap; }
+.vault-layout { position: relative; }
+.vault-sidebar { background: color-mix(in oklab, var(--background) 70%, black); }
 .vault-content { width: 100%; max-width: 1200px; margin-inline: auto; }
 .vault-nav-link { display: flex; align-items: center; gap: 0.75rem; border: 1px solid transparent; }
-.vault-nav-link[aria-current="page"] { border-color: var(--border); }
+.vault-nav-link > svg { color: var(--primary); }
+.vault-nav-link.vault-nav-active { border-color: color-mix(in oklab, var(--primary) 65%, transparent); color: var(--primary); background: color-mix(in oklab, var(--primary) 7%, transparent); box-shadow: 0 0 14px -6px color-mix(in oklab, var(--primary) 55%, transparent); }
 .vault-main > .vault-content > section:first-of-type { background: transparent; border: 0; border-bottom: 1px solid var(--border); border-radius: 0; padding: 1.5rem 0 2rem; margin-bottom: 1.5rem; }
 .vault-main .panel label { flex-wrap: wrap; min-width: 0; }
 .vault-main .panel .flex { min-width: 0; }
