@@ -57,7 +57,7 @@ function Page() {
                 <Button asChild className="btn-ghost">
                   <a href={changePasswordUrls(a.site)[0]} target="_blank" rel="noopener noreferrer">Open change-password page ↗</a>
                 </Button>
-                <p className="text-muted-foreground">2. Suggested unique password (sample — not stored anywhere):</p>
+                <p className="text-muted-foreground">2. Suggested unique password (Demo — not stored). You can also write your own or set passphrase preferences on the Password batches page:</p>
                 <p className="mini-card break-all font-mono text-xs">{suggested[a.id]}</p>
                 <div className="flex flex-wrap gap-2">
                   <Button className="btn-ghost" onClick={() => setSaved((x) => new Set(x).add(a.id))} disabled={saved.has(a.id)}>
@@ -65,7 +65,7 @@ function Page() {
                   </Button>
                   <Button className="btn-primary" disabled={!saved.has(a.id)}
                     onClick={() => { setDone((x) => new Set(x).add(a.id)); setOpen(null); }}>
-                    4. I changed it on the site — mark done
+                    4. I changed it — verify &amp; mark done (Demo)
                   </Button>
                 </div>
               </div>

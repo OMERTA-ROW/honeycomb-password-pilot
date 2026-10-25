@@ -12,12 +12,14 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AccountsRouteImport } from './routes/accounts'
 import { Route as DevicesRouteImport } from './routes/devices'
+import { Route as EmergencyAccessRouteImport } from './routes/emergency-access'
 import { Route as EvidenceRouteImport } from './routes/evidence'
 import { Route as HealthRouteImport } from './routes/health'
 import { Route as HoneyPackRouteImport } from './routes/honey-pack'
 import { Route as IncidentNotesRouteImport } from './routes/incident-notes'
 import { Route as RecoveryRouteImport } from './routes/recovery'
 import { Route as RoadmapRouteImport } from './routes/roadmap'
+import { Route as SecurityModelRouteImport } from './routes/security-model'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -32,6 +34,11 @@ const AccountsRoute = AccountsRouteImport.update({
 const DevicesRoute = DevicesRouteImport.update({
   id: '/devices',
   path: '/devices',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EmergencyAccessRoute = EmergencyAccessRouteImport.update({
+  id: '/emergency-access',
+  path: '/emergency-access',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EvidenceRoute = EvidenceRouteImport.update({
@@ -64,40 +71,51 @@ const RoadmapRoute = RoadmapRouteImport.update({
   path: '/roadmap',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SecurityModelRoute = SecurityModelRouteImport.update({
+  id: '/security-model',
+  path: '/security-model',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/accounts': typeof AccountsRoute
   '/devices': typeof DevicesRoute
+  '/emergency-access': typeof EmergencyAccessRoute
   '/evidence': typeof EvidenceRoute
   '/health': typeof HealthRoute
   '/honey-pack': typeof HoneyPackRoute
   '/incident-notes': typeof IncidentNotesRoute
   '/recovery': typeof RecoveryRoute
   '/roadmap': typeof RoadmapRoute
+  '/security-model': typeof SecurityModelRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/accounts': typeof AccountsRoute
   '/devices': typeof DevicesRoute
+  '/emergency-access': typeof EmergencyAccessRoute
   '/evidence': typeof EvidenceRoute
   '/health': typeof HealthRoute
   '/honey-pack': typeof HoneyPackRoute
   '/incident-notes': typeof IncidentNotesRoute
   '/recovery': typeof RecoveryRoute
   '/roadmap': typeof RoadmapRoute
+  '/security-model': typeof SecurityModelRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/accounts': typeof AccountsRoute
   '/devices': typeof DevicesRoute
+  '/emergency-access': typeof EmergencyAccessRoute
   '/evidence': typeof EvidenceRoute
   '/health': typeof HealthRoute
   '/honey-pack': typeof HoneyPackRoute
   '/incident-notes': typeof IncidentNotesRoute
   '/recovery': typeof RecoveryRoute
   '/roadmap': typeof RoadmapRoute
+  '/security-model': typeof SecurityModelRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -105,46 +123,54 @@ export interface FileRouteTypes {
     | '/'
     | '/accounts'
     | '/devices'
+    | '/emergency-access'
     | '/evidence'
     | '/health'
     | '/honey-pack'
     | '/incident-notes'
     | '/recovery'
     | '/roadmap'
+    | '/security-model'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/accounts'
     | '/devices'
+    | '/emergency-access'
     | '/evidence'
     | '/health'
     | '/honey-pack'
     | '/incident-notes'
     | '/recovery'
     | '/roadmap'
+    | '/security-model'
   id:
     | '__root__'
     | '/'
     | '/accounts'
     | '/devices'
+    | '/emergency-access'
     | '/evidence'
     | '/health'
     | '/honey-pack'
     | '/incident-notes'
     | '/recovery'
     | '/roadmap'
+    | '/security-model'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AccountsRoute: typeof AccountsRoute
   DevicesRoute: typeof DevicesRoute
+  EmergencyAccessRoute: typeof EmergencyAccessRoute
   EvidenceRoute: typeof EvidenceRoute
   HealthRoute: typeof HealthRoute
   HoneyPackRoute: typeof HoneyPackRoute
   IncidentNotesRoute: typeof IncidentNotesRoute
   RecoveryRoute: typeof RecoveryRoute
   RoadmapRoute: typeof RoadmapRoute
+  SecurityModelRoute: typeof SecurityModelRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -168,6 +194,13 @@ declare module '@tanstack/react-router' {
       path: '/devices'
       fullPath: '/devices'
       preLoaderRoute: typeof DevicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/emergency-access': {
+      id: '/emergency-access'
+      path: '/emergency-access'
+      fullPath: '/emergency-access'
+      preLoaderRoute: typeof EmergencyAccessRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/evidence': {
@@ -212,6 +245,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RoadmapRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/security-model': {
+      id: '/security-model'
+      path: '/security-model'
+      fullPath: '/security-model'
+      preLoaderRoute: typeof SecurityModelRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -219,12 +259,14 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AccountsRoute: AccountsRoute,
   DevicesRoute: DevicesRoute,
+  EmergencyAccessRoute: EmergencyAccessRoute,
   EvidenceRoute: EvidenceRoute,
   HealthRoute: HealthRoute,
   HoneyPackRoute: HoneyPackRoute,
   IncidentNotesRoute: IncidentNotesRoute,
   RecoveryRoute: RecoveryRoute,
   RoadmapRoute: RoadmapRoute,
+  SecurityModelRoute: SecurityModelRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

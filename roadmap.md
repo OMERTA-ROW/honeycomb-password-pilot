@@ -5,12 +5,13 @@
 
 ## Queued add-ons (owner, 2026-10-25)
 - [ ] 1. Real encryption foundation (Argon2id/PBKDF2 → AES-GCM on device, ciphertext-only sync) — blocked: needs Lovable Cloud authorization + recovery/data-loss decisions (docs/PLAN_AUTH_CRYPTO.md §8) and independent review before real passwords
-- [ ] 2. HIBP k-anonymity breach check
+- [ ] 2. HIBP k-anonymity breach check — demo on /security-model (prefix computed locally, no network); real lookup needs owner OK for outside request
 - [x] 3. Password Health dashboard (/health, sample flags; breach count is a sample label)
 - [x] 4. Fix Next queue (/health: ranked, opens /.well-known/change-password, suggests unique password, simulated save, done only on user confirm)
 - [ ] 5. Passkey-first suggestions (sample hint shown in Fix Next; real detection not built)
+- [ ] 1b. Security model documented + demo UI on /security-model (Face ID/device key needs native app)
 - [ ] 6. Honey Pack alert endpoint (screen exists, demo-labelled)
-- [ ] 7. Trusted contact / emergency access with waiting period
+- [ ] 7. Trusted contact / emergency access — demo on /emergency-access (waiting-period rule tested); real version blocked on accounts + crypto
 - [x] 8. Terminal promo card (already in menu on Status/Roadmap only)
 
 ## Done (preview, simulated)

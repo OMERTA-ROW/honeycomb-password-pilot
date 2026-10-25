@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
-import { Activity, HeartPulse, KeyRound, Hexagon, LifeBuoy, Monitor, NotebookPen, FileDown, ListChecks, LockKeyhole } from "lucide-react";
+import { Activity, ShieldCheck, Users, HeartPulse, KeyRound, Hexagon, LifeBuoy, Monitor, NotebookPen, FileDown, ListChecks, LockKeyhole } from "lucide-react";
 import { HiveBackdrop } from "@/components/HiveBackdrop";
 
 const nav = [
@@ -12,6 +12,8 @@ const nav = [
   { to: "/devices", label: "Devices", icon: Monitor },
   { to: "/incident-notes", label: "Incident notes", icon: NotebookPen },
   { to: "/evidence", label: "Evidence export", icon: FileDown },
+  { to: "/security-model", label: "Security model", icon: ShieldCheck },
+  { to: "/emergency-access", label: "Emergency access", icon: Users },
   { to: "/roadmap", label: "Roadmap & pricing", icon: ListChecks },
 ] as const;
 
