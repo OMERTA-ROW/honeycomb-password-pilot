@@ -14,13 +14,87 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      account_activity: {
+        Row: {
+          event: string
+          id: string
+          occurred_at: string
+          user_id: string
+        }
+        Insert: {
+          event: string
+          id?: string
+          occurred_at?: string
+          user_id: string
+        }
+        Update: {
+          event?: string
+          id?: string
+          occurred_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      account_sessions: {
+        Row: {
+          created_at: string
+          expires_at: string
+          id: string
+          label: string
+          last_seen_at: string
+          revoked_at: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          expires_at?: string
+          id: string
+          label?: string
+          last_seen_at?: string
+          revoked_at?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          expires_at?: string
+          id?: string
+          label?: string
+          last_seen_at?: string
+          revoked_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          display_name: string
+          id: string
+        }
+        Insert: {
+          created_at?: string
+          display_name?: string
+          id: string
+        }
+        Update: {
+          created_at?: string
+          display_name?: string
+          id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      account_session_active: { Args: never; Returns: boolean }
+      register_account_session: { Args: never; Returns: string }
+      revoke_account_session: {
+        Args: { target_id: string }
+        Returns: undefined
+      }
+      revoke_other_account_sessions: { Args: never; Returns: undefined }
     }
     Enums: {
       [_ in never]: never

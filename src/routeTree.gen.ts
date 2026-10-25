@@ -10,7 +10,9 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AccountRouteImport } from './routes/account'
 import { Route as AccountsRouteImport } from './routes/accounts'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as DevicesRouteImport } from './routes/devices'
 import { Route as EmergencyAccessRouteImport } from './routes/emergency-access'
 import { Route as EvidenceRouteImport } from './routes/evidence'
@@ -18,6 +20,7 @@ import { Route as HealthRouteImport } from './routes/health'
 import { Route as HoneyPackRouteImport } from './routes/honey-pack'
 import { Route as IncidentNotesRouteImport } from './routes/incident-notes'
 import { Route as RecoveryRouteImport } from './routes/recovery'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as RoadmapRouteImport } from './routes/roadmap'
 import { Route as SecurityModelRouteImport } from './routes/security-model'
 import { Route as WalletProtectionRouteImport } from './routes/wallet-protection'
@@ -27,9 +30,19 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AccountRoute = AccountRouteImport.update({
+  id: '/account',
+  path: '/account',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AccountsRoute = AccountsRouteImport.update({
   id: '/accounts',
   path: '/accounts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DevicesRoute = DevicesRouteImport.update({
@@ -67,6 +80,11 @@ const RecoveryRoute = RecoveryRouteImport.update({
   path: '/recovery',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RoadmapRoute = RoadmapRouteImport.update({
   id: '/roadmap',
   path: '/roadmap',
@@ -85,7 +103,9 @@ const WalletProtectionRoute = WalletProtectionRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/account': typeof AccountRoute
   '/accounts': typeof AccountsRoute
+  '/auth': typeof AuthRoute
   '/devices': typeof DevicesRoute
   '/emergency-access': typeof EmergencyAccessRoute
   '/evidence': typeof EvidenceRoute
@@ -93,13 +113,16 @@ export interface FileRoutesByFullPath {
   '/honey-pack': typeof HoneyPackRoute
   '/incident-notes': typeof IncidentNotesRoute
   '/recovery': typeof RecoveryRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/roadmap': typeof RoadmapRoute
   '/security-model': typeof SecurityModelRoute
   '/wallet-protection': typeof WalletProtectionRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/account': typeof AccountRoute
   '/accounts': typeof AccountsRoute
+  '/auth': typeof AuthRoute
   '/devices': typeof DevicesRoute
   '/emergency-access': typeof EmergencyAccessRoute
   '/evidence': typeof EvidenceRoute
@@ -107,6 +130,7 @@ export interface FileRoutesByTo {
   '/honey-pack': typeof HoneyPackRoute
   '/incident-notes': typeof IncidentNotesRoute
   '/recovery': typeof RecoveryRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/roadmap': typeof RoadmapRoute
   '/security-model': typeof SecurityModelRoute
   '/wallet-protection': typeof WalletProtectionRoute
@@ -114,7 +138,9 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/account': typeof AccountRoute
   '/accounts': typeof AccountsRoute
+  '/auth': typeof AuthRoute
   '/devices': typeof DevicesRoute
   '/emergency-access': typeof EmergencyAccessRoute
   '/evidence': typeof EvidenceRoute
@@ -122,6 +148,7 @@ export interface FileRoutesById {
   '/honey-pack': typeof HoneyPackRoute
   '/incident-notes': typeof IncidentNotesRoute
   '/recovery': typeof RecoveryRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/roadmap': typeof RoadmapRoute
   '/security-model': typeof SecurityModelRoute
   '/wallet-protection': typeof WalletProtectionRoute
@@ -130,7 +157,9 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/account'
     | '/accounts'
+    | '/auth'
     | '/devices'
     | '/emergency-access'
     | '/evidence'
@@ -138,13 +167,16 @@ export interface FileRouteTypes {
     | '/honey-pack'
     | '/incident-notes'
     | '/recovery'
+    | '/reset-password'
     | '/roadmap'
     | '/security-model'
     | '/wallet-protection'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/account'
     | '/accounts'
+    | '/auth'
     | '/devices'
     | '/emergency-access'
     | '/evidence'
@@ -152,13 +184,16 @@ export interface FileRouteTypes {
     | '/honey-pack'
     | '/incident-notes'
     | '/recovery'
+    | '/reset-password'
     | '/roadmap'
     | '/security-model'
     | '/wallet-protection'
   id:
     | '__root__'
     | '/'
+    | '/account'
     | '/accounts'
+    | '/auth'
     | '/devices'
     | '/emergency-access'
     | '/evidence'
@@ -166,6 +201,7 @@ export interface FileRouteTypes {
     | '/honey-pack'
     | '/incident-notes'
     | '/recovery'
+    | '/reset-password'
     | '/roadmap'
     | '/security-model'
     | '/wallet-protection'
@@ -173,7 +209,9 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AccountRoute: typeof AccountRoute
   AccountsRoute: typeof AccountsRoute
+  AuthRoute: typeof AuthRoute
   DevicesRoute: typeof DevicesRoute
   EmergencyAccessRoute: typeof EmergencyAccessRoute
   EvidenceRoute: typeof EvidenceRoute
@@ -181,6 +219,7 @@ export interface RootRouteChildren {
   HoneyPackRoute: typeof HoneyPackRoute
   IncidentNotesRoute: typeof IncidentNotesRoute
   RecoveryRoute: typeof RecoveryRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
   RoadmapRoute: typeof RoadmapRoute
   SecurityModelRoute: typeof SecurityModelRoute
   WalletProtectionRoute: typeof WalletProtectionRoute
@@ -195,11 +234,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/account': {
+      id: '/account'
+      path: '/account'
+      fullPath: '/account'
+      preLoaderRoute: typeof AccountRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/accounts': {
       id: '/accounts'
       path: '/accounts'
       fullPath: '/accounts'
       preLoaderRoute: typeof AccountsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/devices': {
@@ -251,6 +304,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RecoveryRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/roadmap': {
       id: '/roadmap'
       path: '/roadmap'
@@ -277,7 +337,9 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AccountRoute: AccountRoute,
   AccountsRoute: AccountsRoute,
+  AuthRoute: AuthRoute,
   DevicesRoute: DevicesRoute,
   EmergencyAccessRoute: EmergencyAccessRoute,
   EvidenceRoute: EvidenceRoute,
@@ -285,6 +347,7 @@ const rootRouteChildren: RootRouteChildren = {
   HoneyPackRoute: HoneyPackRoute,
   IncidentNotesRoute: IncidentNotesRoute,
   RecoveryRoute: RecoveryRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
   RoadmapRoute: RoadmapRoute,
   SecurityModelRoute: SecurityModelRoute,
   WalletProtectionRoute: WalletProtectionRoute,

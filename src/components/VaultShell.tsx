@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
-import { Activity, ShieldCheck, Users, HeartPulse, KeyRound, Hexagon, LifeBuoy, Monitor, NotebookPen, FileDown, ListChecks, LockKeyhole, Wallet } from "lucide-react";
+import { Activity, ShieldCheck, Users, HeartPulse, KeyRound, Hexagon, LifeBuoy, Monitor, NotebookPen, FileDown, ListChecks, LockKeyhole, Wallet, UserRound } from "lucide-react";
 import { HiveBackdrop } from "@/components/HiveBackdrop";
 
 const nav = [
@@ -15,6 +15,7 @@ const nav = [
   { to: "/evidence", label: "Evidence export", icon: FileDown },
   { to: "/security-model", label: "Security model", icon: ShieldCheck },
   { to: "/emergency-access", label: "Emergency access", icon: Users },
+  { to: "/account", label: "Account & security", icon: UserRound },
   { to: "/roadmap", label: "Roadmap & pricing", icon: ListChecks },
 ] as const;
 
@@ -28,7 +29,7 @@ export function Hex({ className = "h-8 w-8" }: { className?: string }) {
   );
 }
 
-export function VaultShell({ children, showPromo = false }: { children: ReactNode; showPromo?: boolean }) {
+export function VaultShell({ children, showPromo = false, accountMode = false }: { children: ReactNode; showPromo?: boolean; accountMode?: boolean }) {
   return (
     <>
     <HiveBackdrop />
@@ -66,7 +67,7 @@ export function VaultShell({ children, showPromo = false }: { children: ReactNod
             <div className="mb-6 flex items-start gap-2 rounded-md border border-warning/40 bg-card px-3 py-3 text-xs leading-relaxed text-warning">
               <LockKeyhole className="mt-0.5 h-3.5 w-3.5 shrink-0" aria-hidden="true" />
               <span>
-              Private preview · Simulation only · Sample data · No real passwords are stored or changed.
+              {accountMode ? "Private preview · Real account access only · Vault and wallet records remain Demo · No vault encryption or payment integration." : "Private preview · Simulation only · Sample data · No real vault passwords are stored or changed."}
               </span>
             </div>
             {children}

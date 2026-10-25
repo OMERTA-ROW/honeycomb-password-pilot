@@ -12,8 +12,8 @@ export const Route = createFileRoute("/wallet-protection")({
 });
 
 const outcomes: { value: DemoOutcome; label: string }[] = [
-  { value: "success", label: "Biometric success (sample)" },
-  { value: "fallback", label: "Device credential success (sample)" },
+  { value: "success", label: "Demo biometric success" },
+  { value: "fallback", label: "Demo credential fallback" },
   { value: "canceled", label: "Canceled" },
   { value: "failed", label: "Failed" },
   { value: "lockout", label: "Biometric lockout" },
@@ -52,7 +52,8 @@ function WalletProtection() {
     const next = performWalletDemo(state, action, time);
     setState(next);
     setNow(time);
-    const success = action === "unlock" ? canViewWalletDemo(next, time) : next.revoked && !state.revoked;
+    const hadApproval = state.approval?.action === action && time < state.approval.expiresAt;
+    const success = hadApproval && (action === "unlock" ? canViewWalletDemo(next, time) : next.revoked && !state.revoked);
     setMessage(success ? action === "unlock" ? "Demo: sample records unlocked for 60 seconds. No biometric was collected." : "Demo: this sample Vault session revoked. Apple/Google Wallet cards and payments are unchanged." : "Demo: access denied. Fresh approval for this exact action is required.");
     record(success ? `Sample ${action} completed` : "Sample action denied");
   }
@@ -65,9 +66,9 @@ function WalletProtection() {
     </div>
     <section className="mb-6 border-y py-5">
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3"><h2 className="font-medium">Sample record access</h2><span className={visible ? "tag-ok" : "tag-sim"}>Demo · {state.revoked ? "session revoked" : visible ? "unlocked" : "locked"}</span></div>
-      <div className="grid gap-4 xl:grid-cols-2">
-        <div className="space-y-3 text-sm">
-          <label className="block">Proposed Vault action<select aria-label="Proposed Vault action" value={action} onChange={e => { setAction(e.target.value as DemoAction); setState(s => ({ ...s, approval: null })); }} className="mt-1 block w-full rounded-md border bg-background px-3 py-2"><option value="unlock">Unlock sample records</option><option value="revoke-vault-session">Revoke this sample Vault session</option></select></label>
+      <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
+        <div className="min-w-0 space-y-3 text-sm">
+          <label className="block">Proposed Vault action<select aria-label="Proposed Vault action" value={action} onChange={e => { setAction(e.target.value as DemoAction); setState(s => ({ ...s, approval: null })); }} className="mt-1 block w-full rounded-md border bg-background px-3 py-2"><option value="unlock">Unlock sample records</option><option value="revoke-vault-session">Revoke Demo Vault session</option></select></label>
           <label className="block">Demo authentication outcome<select aria-label="Demo authentication outcome" value={outcome} onChange={e => { setOutcome(e.target.value as DemoOutcome); setState(s => ({ ...s, approval: null })); }} className="mt-1 block w-full rounded-md border bg-background px-3 py-2">{outcomes.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}</select></label>
           <div className="flex flex-wrap gap-2"><Button onClick={approve} disabled={state.revoked}><Fingerprint />Demo authorize</Button><Button onClick={execute} disabled={state.revoked}>Demo perform action</Button><Button variant="outline" onClick={() => { setState(lockWalletDemo(state)); setMessage("Demo: sample records locked; approvals cleared."); record("Sample manual lock"); }} disabled={!visible}><LockKeyhole />Lock Demo</Button>{state.revoked && <Button variant="outline" onClick={() => { setState(initialWalletDemo); setMessage("Demo reset: locked. No real session was restored."); }}>Reset Demo</Button>}</div>
           <p role="status" className="text-warning">{message}</p>
@@ -80,7 +81,7 @@ function WalletProtection() {
     </section>
     <h2 className="mb-3 font-medium">Platform assessment <span className="tag-muted">No integration selected</span></h2>
     <div className="mb-6 grid gap-4 md:grid-cols-2">
-      <article className="panel text-sm"><h3 className="font-medium">Android / Google Wallet</h3><p className="my-3 text-muted-foreground">Planned: AndroidX BiometricPrompt + device-credential fallback, with capability/version checks and Keystore-backed action approval. Wallet pass APIs are not payment-card provisioning. Issuer/provider eligibility, region, native app and production access remain unverified.</p><Button asChild variant="outline"><a href="https://support.google.com/wallet/answer/12059519?hl=en" target="_blank" rel="noopener noreferrer">Google Wallet help<ExternalLink /></a></Button></article>
+      <article className="panel text-sm"><h3 className="font-medium">Android / Google Wallet</h3><p className="my-3 text-muted-foreground">Planned: AndroidX BiometricPrompt + device-credential fallback, with capability/version checks and Keystore-backed action approval. Wallet pass APIs are not payment-card provisioning. Issuer/provider eligibility, region, native app and production access remain unverified.</p><Button asChild variant="outline"><a href="https://support.google.com/wallet/answer/7643925" target="_blank" rel="noopener noreferrer">Google Wallet help<ExternalLink /></a></Button></article>
       <article className="panel text-sm"><h3 className="font-medium">iOS / Apple Wallet</h3><p className="my-3 text-muted-foreground">Planned: LocalAuthentication + Keychain/Secure Enclave access controls, with passcode fallback and availability checks. Payment-card provisioning requires separate entitlement/provider eligibility; grant criteria, region and this app’s eligibility remain unverified.</p><Button asChild variant="outline"><a href="https://support.apple.com/en-us/101593" target="_blank" rel="noopener noreferrer">Apple lost-device guidance<ExternalLink /></a></Button></article>
     </div>
     <div className="mb-6 border-y py-4 text-sm text-muted-foreground"><h2 className="mb-2 font-medium text-foreground">Lost-device scope & safety gates</h2><p>Revocation is for OUR Vault sessions only; it cannot suspend payment cards or recall exposed data. Use official wallet, account and issuer controls. Payment authorization stays within Apple/Google/issuer flows; Vault cannot add approval to every external transaction.</p><p className="mt-2">Never provide full card numbers, CVV, PINs, payment keys or wallet tokens. No entry form or persistent wallet storage exists here. Real records require reviewed encryption foundations; any payment-data scope also requires provider architecture and compliance review.</p></div>

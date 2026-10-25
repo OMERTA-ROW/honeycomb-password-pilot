@@ -1,7 +1,15 @@
 import { describe, expect, it } from "vitest";
 import { approveWalletDemo, canViewWalletDemo, DEMO_APPROVAL_MS, DEMO_UNLOCK_MS, initialWalletDemo, lockWalletDemo, performWalletDemo, walletTapToPayAvailable } from "./wallet-demo";
+import { sampleWalletRecords } from "./sample-data";
 
 describe("Wallet simulation boundaries", () => {
+  it("contains only fixed masked references, no sensitive payment fields", () => {
+    for (const record of sampleWalletRecords) {
+      expect(Object.keys(record).sort()).toEqual(["device", "id", "label", "masked", "platform"]);
+      expect(record.masked).toMatch(/^•••• \d{4}$/);
+      expect(JSON.stringify(record)).not.toMatch(/\d{12,19}/);
+    }
+  });
   it("denies locked and unapproved access", () => {
     expect(canViewWalletDemo(initialWalletDemo, 100)).toBe(false);
     expect(performWalletDemo(initialWalletDemo, "unlock", 100).unlockedUntil).toBe(0);
@@ -9,6 +17,8 @@ describe("Wallet simulation boundaries", () => {
   it.each(["canceled", "failed", "lockout", "unsupported"] as const)("denies %s authentication", outcome => {
     const approved = approveWalletDemo(initialWalletDemo, "unlock", outcome, 100);
     expect(performWalletDemo(approved, "unlock", 101).unlockedUntil).toBe(0);
+    const unlocked = performWalletDemo(approveWalletDemo(initialWalletDemo, "unlock", "success", 100), "unlock", 101);
+    expect(performWalletDemo(approveWalletDemo(unlocked, "revoke-vault-session", outcome, 102), "revoke-vault-session", 103).revoked).toBe(false);
   });
   it("allows simulated secure device credential fallback", () => {
     const state = performWalletDemo(approveWalletDemo(initialWalletDemo, "unlock", "fallback", 100), "unlock", 101);
