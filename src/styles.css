@@ -56,11 +56,12 @@
   --success: oklch(0.72 0.14 150);
   --warning: oklch(0.8 0.15 85);
   --info: oklch(0.72 0.1 230);
-  --border: oklch(0.42 0.055 85);
-  --input: oklch(0.49 0.065 85);
+  --border: oklch(0.48 0.07 85);
+  --input: oklch(0.52 0.07 85);
   --ring: var(--primary);
-  --hive-gold-soft: oklch(0.53 0.08 85);
-  --hive-gold-bright: oklch(0.84 0.1 85);
+  --hive-gold-deep: oklch(0.4 0.07 85);
+  --hive-gold-soft: oklch(0.6 0.1 85);
+  --hive-gold-bright: oklch(0.88 0.11 88);
 }
 
 @layer base {
