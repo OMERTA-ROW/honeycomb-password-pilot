@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
-import { Activity, ShieldCheck, Users, HeartPulse, KeyRound, Hexagon, LifeBuoy, Monitor, NotebookPen, FileDown, ListChecks, LockKeyhole } from "lucide-react";
+import { Activity, ShieldCheck, Users, HeartPulse, KeyRound, Hexagon, LifeBuoy, Monitor, NotebookPen, FileDown, ListChecks, LockKeyhole, Wallet } from "lucide-react";
 import { HiveBackdrop } from "@/components/HiveBackdrop";
 
 const nav = [
@@ -10,6 +10,7 @@ const nav = [
   { to: "/honey-pack", label: "Digital Honey Pack", icon: Hexagon },
   { to: "/recovery", label: "Recovery", icon: LifeBuoy },
   { to: "/devices", label: "Devices", icon: Monitor },
+  { to: "/wallet-protection", label: "Wallet Protection", icon: Wallet },
   { to: "/incident-notes", label: "Incident notes", icon: NotebookPen },
   { to: "/evidence", label: "Evidence export", icon: FileDown },
   { to: "/security-model", label: "Security model", icon: ShieldCheck },

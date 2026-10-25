@@ -38,3 +38,9 @@ Optional discreet Terminal card in Vault menu/companion only; never inside secur
 - Name/domain/trademark unverified. Pricing not validated (audit, support, storage, fees, acquisition uncosted). Terminal priced separately ($20/yr) in its own plan.
 - Parrot Security OS = possible test environment only; Ghost/Dragon products unidentified.
 - Next foundations plan: docs/PLAN_AUTH_CRYPTO.md.
+
+## Staged Wallet Protection (2026-10-25)
+Owner's “ISO” is assumed iOS/Apple Wallet alongside Android/Google Wallet. Queue after existing work; approval/recovery/review gates unchanged. docs/WALLET_PROTECTION.md records design, primary-source assessment, acceptance and blockers. Preview uses fixed masked sample references only, labelled Demo. Planned native OS Face ID/fingerprint/device-credential unlock and action-bound step-up; never collect biometric images/templates. Planned record encryption is separate from payment provisioning/NFC, which stays unavailable. No card/CVV/PIN/payment-key/token entry or storage. Vault-only revocation and official wallet-control guidance; no transaction interception/control or universal payment approval gate.
+
+## Real account foundation request (2026-10-25)
+Lovable Cloud provisioned via supported tool flow; stored-profile decision pending. Queue signup/login/logout, verification/reset, profile/settings, timestamped activity and supported session management. Strict per-user authorization/RLS and real isolation/failure tests required. Default auth sender exists; delivery not yet tested, no custom domain configured. Authentication is not vault encryption; real secrets remain prohibited. Terminal identity sharing is future separately authorized design, no SSO.

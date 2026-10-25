@@ -78,3 +78,8 @@ Recommended start: A + B. No server-held escrow (would break "server cannot decr
 7. Which metadata must be encrypted (site names, usernames, timestamps)?
 8. Budget and vendor for independent security review (paid service — needs separate authorization).
 9. Authorization to enable Lovable Cloud (database/auth) for step 2 — not enabled now.
+
+## 9. Wallet and account addenda (2026-10-25)
+Cloud was provisioned for the new real-account request; step 2 itself is not implemented. Account profile decision and hosted provider/email configuration checks remain pending. Preserve recovery choice, data-loss, metadata and independent-review decisions; no real vault secrets. Future authorized shared Terminal identity must be designed separately; no SSO exists.
+
+Wallet Protection remains staged after existing work. docs/WALLET_PROTECTION.md records OS authentication/API feasibility and unresolved payment eligibility. Encrypt permitted records only after reviewed foundations; do not implement payment cryptography or store card/CVV/PIN/payment keys/tokens. Native Face ID/fingerprint/device-credential authentication must authorize the specific displayed Vault action with expiry and replay protection, not grant blanket permission. Failure/cancellation/lockout/unsupported device denies; secure platform fallback, auto-lock and reauthentication must be tested. No biometric collection. Web verification does not promise modality. Payment authorization belongs to Apple/Google/issuer flows; no web NFC or external transaction gate. Owner approval, native eligibility/entitlements/regions/provider partnerships, compliance and independent security review plus native end-to-end tests precede any real integration.
