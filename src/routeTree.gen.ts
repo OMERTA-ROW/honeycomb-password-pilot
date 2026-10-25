@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AccountsRouteImport } from './routes/accounts'
 import { Route as DevicesRouteImport } from './routes/devices'
 import { Route as EvidenceRouteImport } from './routes/evidence'
+import { Route as HealthRouteImport } from './routes/health'
 import { Route as HoneyPackRouteImport } from './routes/honey-pack'
 import { Route as IncidentNotesRouteImport } from './routes/incident-notes'
 import { Route as RecoveryRouteImport } from './routes/recovery'
@@ -36,6 +37,11 @@ const DevicesRoute = DevicesRouteImport.update({
 const EvidenceRoute = EvidenceRouteImport.update({
   id: '/evidence',
   path: '/evidence',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HealthRoute = HealthRouteImport.update({
+  id: '/health',
+  path: '/health',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HoneyPackRoute = HoneyPackRouteImport.update({
@@ -64,6 +70,7 @@ export interface FileRoutesByFullPath {
   '/accounts': typeof AccountsRoute
   '/devices': typeof DevicesRoute
   '/evidence': typeof EvidenceRoute
+  '/health': typeof HealthRoute
   '/honey-pack': typeof HoneyPackRoute
   '/incident-notes': typeof IncidentNotesRoute
   '/recovery': typeof RecoveryRoute
@@ -74,6 +81,7 @@ export interface FileRoutesByTo {
   '/accounts': typeof AccountsRoute
   '/devices': typeof DevicesRoute
   '/evidence': typeof EvidenceRoute
+  '/health': typeof HealthRoute
   '/honey-pack': typeof HoneyPackRoute
   '/incident-notes': typeof IncidentNotesRoute
   '/recovery': typeof RecoveryRoute
@@ -85,6 +93,7 @@ export interface FileRoutesById {
   '/accounts': typeof AccountsRoute
   '/devices': typeof DevicesRoute
   '/evidence': typeof EvidenceRoute
+  '/health': typeof HealthRoute
   '/honey-pack': typeof HoneyPackRoute
   '/incident-notes': typeof IncidentNotesRoute
   '/recovery': typeof RecoveryRoute
@@ -97,6 +106,7 @@ export interface FileRouteTypes {
     | '/accounts'
     | '/devices'
     | '/evidence'
+    | '/health'
     | '/honey-pack'
     | '/incident-notes'
     | '/recovery'
@@ -107,6 +117,7 @@ export interface FileRouteTypes {
     | '/accounts'
     | '/devices'
     | '/evidence'
+    | '/health'
     | '/honey-pack'
     | '/incident-notes'
     | '/recovery'
@@ -117,6 +128,7 @@ export interface FileRouteTypes {
     | '/accounts'
     | '/devices'
     | '/evidence'
+    | '/health'
     | '/honey-pack'
     | '/incident-notes'
     | '/recovery'
@@ -128,6 +140,7 @@ export interface RootRouteChildren {
   AccountsRoute: typeof AccountsRoute
   DevicesRoute: typeof DevicesRoute
   EvidenceRoute: typeof EvidenceRoute
+  HealthRoute: typeof HealthRoute
   HoneyPackRoute: typeof HoneyPackRoute
   IncidentNotesRoute: typeof IncidentNotesRoute
   RecoveryRoute: typeof RecoveryRoute
@@ -162,6 +175,13 @@ declare module '@tanstack/react-router' {
       path: '/evidence'
       fullPath: '/evidence'
       preLoaderRoute: typeof EvidenceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/health': {
+      id: '/health'
+      path: '/health'
+      fullPath: '/health'
+      preLoaderRoute: typeof HealthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/honey-pack': {
@@ -200,6 +220,7 @@ const rootRouteChildren: RootRouteChildren = {
   AccountsRoute: AccountsRoute,
   DevicesRoute: DevicesRoute,
   EvidenceRoute: EvidenceRoute,
+  HealthRoute: HealthRoute,
   HoneyPackRoute: HoneyPackRoute,
   IncidentNotesRoute: IncidentNotesRoute,
   RecoveryRoute: RecoveryRoute,
