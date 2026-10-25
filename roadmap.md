@@ -1,5 +1,8 @@
 # Implementation checklist
 
+## Current visual update
+- [ ] Apply owner-approved black-and-gold edge-hive styling across all pages; check desktop/mobile and existing preview flows (no publishing or access changes).
+
 ## Done (preview, simulated)
 - [x] Branding, responsive shell, status page with next action
 - [x] Simulated password batch flow + unit tests (src/lib/batch.test.ts)
