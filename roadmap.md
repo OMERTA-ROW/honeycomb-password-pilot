@@ -4,6 +4,7 @@
 - [x] Apply owner-approved black-and-gold edge-hive styling across all eight pages; automatic build OK, 15 existing tests passed, browser checks at 1280/390/320px found no horizontal page overflow or runtime errors; simulated batch/MFA, disabled AI screening and sample export verified (no publishing or access changes).
 
 ## Queued add-ons (owner, 2026-10-25)
+- [ ] Wallet Protection (queued after existing work): sample-only UI and staged acceptance/design documentation; real native authentication, encryption, payment provisioning/NFC and provider integrations blocked by existing approvals plus platform/provider/compliance/security gates. “ISO” assumed iOS/Apple Wallet; no activation or real payments.
 - [ ] 1. Real encryption foundation (Argon2id/PBKDF2 → AES-GCM on device, ciphertext-only sync) — blocked: needs Lovable Cloud authorization + recovery/data-loss decisions (docs/PLAN_AUTH_CRYPTO.md §8) and independent review before real passwords
 - [ ] 2. HIBP k-anonymity breach check — demo on /security-model (prefix computed locally, no network); real lookup needs owner OK for outside request
 - [x] 3. Password Health dashboard (/health, sample flags; breach count is a sample label)
