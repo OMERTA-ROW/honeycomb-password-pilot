@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { createFileRoute } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useState } from "react";
@@ -47,9 +48,9 @@ function Page() {
           className="w-full rounded-lg border bg-background p-3 text-sm" />
         {warning && <p className="text-xs text-destructive">{warning}</p>}
         <div className="flex items-center gap-3">
-          <button className="btn-primary" disabled={!enabled || busy || !!warning || !notes.trim()} onClick={submit}>
+          <Button className="btn-primary" disabled={!enabled || busy || !!warning || !notes.trim()} onClick={submit}>
             {busy ? "Organizing…" : "Organize into timeline"}
-          </button>
+          </Button>
           <span className="text-xs text-muted-foreground">{notes.length}/{MAX_NOTES_CHARS}</span>
         </div>
         {error && <p className="text-sm text-destructive">{error}</p>}

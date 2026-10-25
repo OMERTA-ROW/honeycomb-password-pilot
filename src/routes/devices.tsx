@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { createFileRoute } from "@tanstack/react-router";
 import { VaultShell, PageHead, meta } from "@/components/VaultShell";
 import { sampleDevices } from "@/lib/sample-data";
@@ -20,7 +21,7 @@ function Page() {
             <p>Last seen: <span className="font-mono text-xs">{d.lastSeen}</span></p>
             <p>Public IP: <span className="font-mono text-xs">{d.ip}</span></p>
             <p>Permitted location: {d.location}</p>
-            <button className="btn-ghost mt-2" disabled title="Not implemented — needs native app">Find Nearby (not implemented)</button>
+            <Button className="btn-ghost mt-2" disabled title="Not implemented — needs native app">Find Nearby (not implemented)</Button>
           </div>
         ))}
       </div>

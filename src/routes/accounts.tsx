@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { VaultShell, PageHead, meta } from "@/components/VaultShell";
@@ -87,7 +88,7 @@ function Accounts() {
               );
             })}
           </ul>
-          <button className="btn-primary mt-4" disabled={!chosen.length} onClick={() => setStep("preview")}>Preview batch ({chosen.length})</button>
+          <Button className="btn-primary mt-4" disabled={!chosen.length} onClick={() => setStep("preview")}>Preview batch ({chosen.length})</Button>
         </>
       )}
 
@@ -102,8 +103,8 @@ function Accounts() {
           </ul>
           <p className="text-xs text-muted-foreground">Authorizing starts a simulated run. Items are marked completed only after (simulated) verification.</p>
           <div className="flex gap-2">
-            <button className="btn-ghost" onClick={() => setStep("select")}>Back</button>
-            <button className="btn-primary" onClick={() => run(mfa)}>Authorize simulated batch</button>
+            <Button className="btn-ghost" onClick={() => setStep("select")}>Back</Button>
+            <Button className="btn-primary" onClick={() => run(mfa)}>Authorize simulated batch</Button>
           </div>
         </div>
       )}
@@ -113,9 +114,9 @@ function Accounts() {
           {waiting.length > 0 && (
             <div className="panel border-info/50">
               <p className="text-sm">Paused: {waiting.length} account(s) need MFA approval.</p>
-              <button className="btn-primary mt-2" onClick={() => { const n = new Set([...mfa, ...waiting]); setMfa(n); run(n); }}>
+              <Button className="btn-primary mt-2" onClick={() => { const n = new Set([...mfa, ...waiting]); setMfa(n); run(n); }}>
                 I approved MFA (simulated) — resume
-              </button>
+              </Button>
             </div>
           )}
           <ul className="space-y-2">
@@ -129,7 +130,7 @@ function Accounts() {
               );
             })}
           </ul>
-          <button className="btn-ghost" onClick={() => { setStep("select"); setItems({}); setMfa(new Set()); setResult({}); }}>New batch</button>
+          <Button className="btn-ghost" onClick={() => { setStep("select"); setItems({}); setMfa(new Set()); setResult({}); }}>New batch</Button>
         </div>
       )}
     </VaultShell>
