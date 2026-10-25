@@ -20,7 +20,7 @@ function AccountPage() {
     queryFn: async () => {
       if (!user) throw new Error("Unauthorized");
       const [profile, sessions, activity] = await Promise.all([
-        supabase.from("profiles").select("display_name,created_at").eq("id", user.id).single(),
+        supabase.from("profiles").select("display_name,created_at,preferences").eq("id", user.id).single(),
         supabase.from("account_sessions").select("id,label,created_at,last_seen_at,expires_at,revoked_at").order("created_at", { ascending: false }),
         supabase.from("account_activity").select("id,event,occurred_at").order("occurred_at", { ascending: false }).limit(50),
       ]);
@@ -38,6 +38,16 @@ function AccountPage() {
     try {
       const { data, error } = await supabase.from("profiles").update({ display_name: result.data }).eq("id", user.id).select("display_name").single();
       setMessage(error || !data ? "Profile could not be saved. Your session may have expired." : "Profile saved.");
+      await client.invalidateQueries({ queryKey: ["account-private"] });
+    } catch { setMessage(accountError()); } finally { setBusy(false); }
+  }
+  async function togglePromo(show: boolean) {
+    if (!user || !account.data) return;
+    setBusy(true);
+    try {
+      const current = (account.data.profile.preferences ?? {}) as Record<string, unknown>;
+      const { error } = await supabase.from("profiles").update({ preferences: { ...current, show_terminal_promo: show } }).eq("id", user.id);
+      setMessage(error ? "Preference could not be saved. Your session may have expired." : "Preference saved.");
       await client.invalidateQueries({ queryKey: ["account-private"] });
     } catch { setMessage(accountError()); } finally { setBusy(false); }
   }
