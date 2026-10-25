@@ -25,3 +25,13 @@ export const recoveryActions = [
   { action: "Push lock request to Pixel Phone", status: "offline" },
   { action: "Revoke mail.example.com app password", status: "failed" },
 ] as const;
+
+// SAMPLE health metadata only — flags are fictional; no passwords are stored.
+import type { HealthAccount } from "./health";
+export const sampleHealth: HealthAccount[] = [
+  { id: "1", site: "mail.example.com", weak: false, reuseGroup: "r1", breached: true, passkey: true },
+  { id: "2", site: "bank.example.org", weak: false, breached: false, passkey: false },
+  { id: "3", site: "shop.example.net", weak: true, reuseGroup: "r1", breached: false, passkey: false },
+  { id: "4", site: "forum.example.io", weak: true, breached: false, passkey: false },
+  { id: "5", site: "cloud.example.dev", weak: false, breached: false, passkey: true },
+];
