@@ -11,3 +11,6 @@ Add a Wallet Protection page using the current black-and-gold shell and sample-o
 ## Technical details
 Keep demo policy in a pure tested module, records in sample data, and transient state in the page. No backend, persistence, crypto implementation, provider activation, payments or publishing. Run existing and new policy tests, check preview build signals, and inspect desktop/tablet/phone screenshots and the Demo flow.
 Verify primary native authentication documentation and record cancellation/failure, fallback, lockout, timeout, supported-device and one-action authorization acceptance criteria.
+
+## Queued real accounts addendum
+After Wallet Protection, provision Lovable Cloud only through its approval flow. Confirm stored profile needs, inspect actual provider/email configuration, then implement supported signup/login/logout, verification/reset, profile/settings and timestamped account activity with per-user authorization and tests. Session/device listing and revocation must reflect verified platform capabilities, not fabricated sessions. If approval or configuration blocks implementation, keep this task explicitly pending. Authentication does not enable real vault secrets; encryption/recovery/review gates remain. Terminal identity sharing is future separately authorized scope; no SSO now.
