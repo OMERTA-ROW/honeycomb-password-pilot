@@ -116,3 +116,13 @@ Evidence references: `src/lib/batch.test.ts` (9 tests), `src/lib/incident-notes.
 | Sensitive payment/biometric data exclusion | IMPL (preview boundary) / DESIGN | Fixed masked data, no payment entry/persistence; real storage/log review required before scope expansion |
 | No payment reversal / tap-to-pay control claims; Demo UI is not active security; passkeys/device biometrics instead of stored biometric templates | DOC | SPEC.md wallet section; docs/WALLET_PROTECTION.md |
 | Real accounts and activity requested | IMPL (partial) / UNVERIFIED | Cloud connected; basic profiles confirmed; SDK auth, owner/active-session RLS, real sessions/activity implemented. Isolation and login/profile/logout browser tests passed; delivery/social/successful recovery unverified. See ACCOUNT_FOUNDATION.md; no SSO or encryption implied |
+
+## Spam Shield addendum (2026-10-25)
+| Requirement | Status | Evidence / gate |
+|---|---|---|
+| Reviewable SMS/email quarantine, restore, sender block/unblock/allowlist, independent controls | SIM | /spam-shield, spam-demo policy tests; transient fixed samples, no real message access |
+| Preserve codes/important messages; explicit safe unsubscribe; never suspicious-link automation | SIM / DESIGN | Protected sample categories and code markers, trusted-sample confirmation only; real detection/provider validation unbuilt |
+| Optional Quiet Mode, visible accessible settings, no stealth/permission bypass | SIM / DOC | Routine sample notices muted; important notices retained; no OS settings changed |
+| Optional mechanical gold hive, silver/gold bees and fading cells | IMPL (visual) | Opt-in short SVG playback, static with reduced motion; not integration health |
+| Protection active only after real health verification | DOC / UNBUILT | Demo always not connected; future per-channel freshness/permission/readback gate in SPAM_SHIELD.md |
+| Native SMS/email integration and cross-device behavior | DOC / UNBUILT / BLOCKED | Primary platform/provider prerequisites recorded; no services connected, native artifacts, cross-device sync or boot overlay |

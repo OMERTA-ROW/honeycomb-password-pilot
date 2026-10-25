@@ -23,6 +23,7 @@ import { Route as RecoveryRouteImport } from './routes/recovery'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as RoadmapRouteImport } from './routes/roadmap'
 import { Route as SecurityModelRouteImport } from './routes/security-model'
+import { Route as SpamShieldRouteImport } from './routes/spam-shield'
 import { Route as WalletProtectionRouteImport } from './routes/wallet-protection'
 
 const IndexRoute = IndexRouteImport.update({
@@ -95,6 +96,11 @@ const SecurityModelRoute = SecurityModelRouteImport.update({
   path: '/security-model',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SpamShieldRoute = SpamShieldRouteImport.update({
+  id: '/spam-shield',
+  path: '/spam-shield',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const WalletProtectionRoute = WalletProtectionRouteImport.update({
   id: '/wallet-protection',
   path: '/wallet-protection',
@@ -116,6 +122,7 @@ export interface FileRoutesByFullPath {
   '/reset-password': typeof ResetPasswordRoute
   '/roadmap': typeof RoadmapRoute
   '/security-model': typeof SecurityModelRoute
+  '/spam-shield': typeof SpamShieldRoute
   '/wallet-protection': typeof WalletProtectionRoute
 }
 export interface FileRoutesByTo {
@@ -133,6 +140,7 @@ export interface FileRoutesByTo {
   '/reset-password': typeof ResetPasswordRoute
   '/roadmap': typeof RoadmapRoute
   '/security-model': typeof SecurityModelRoute
+  '/spam-shield': typeof SpamShieldRoute
   '/wallet-protection': typeof WalletProtectionRoute
 }
 export interface FileRoutesById {
@@ -151,6 +159,7 @@ export interface FileRoutesById {
   '/reset-password': typeof ResetPasswordRoute
   '/roadmap': typeof RoadmapRoute
   '/security-model': typeof SecurityModelRoute
+  '/spam-shield': typeof SpamShieldRoute
   '/wallet-protection': typeof WalletProtectionRoute
 }
 export interface FileRouteTypes {
@@ -170,6 +179,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/roadmap'
     | '/security-model'
+    | '/spam-shield'
     | '/wallet-protection'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -187,6 +197,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/roadmap'
     | '/security-model'
+    | '/spam-shield'
     | '/wallet-protection'
   id:
     | '__root__'
@@ -204,6 +215,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/roadmap'
     | '/security-model'
+    | '/spam-shield'
     | '/wallet-protection'
   fileRoutesById: FileRoutesById
 }
@@ -222,6 +234,7 @@ export interface RootRouteChildren {
   ResetPasswordRoute: typeof ResetPasswordRoute
   RoadmapRoute: typeof RoadmapRoute
   SecurityModelRoute: typeof SecurityModelRoute
+  SpamShieldRoute: typeof SpamShieldRoute
   WalletProtectionRoute: typeof WalletProtectionRoute
 }
 
@@ -325,6 +338,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SecurityModelRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/spam-shield': {
+      id: '/spam-shield'
+      path: '/spam-shield'
+      fullPath: '/spam-shield'
+      preLoaderRoute: typeof SpamShieldRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/wallet-protection': {
       id: '/wallet-protection'
       path: '/wallet-protection'
@@ -350,6 +370,7 @@ const rootRouteChildren: RootRouteChildren = {
   ResetPasswordRoute: ResetPasswordRoute,
   RoadmapRoute: RoadmapRoute,
   SecurityModelRoute: SecurityModelRoute,
+  SpamShieldRoute: SpamShieldRoute,
   WalletProtectionRoute: WalletProtectionRoute,
 }
 export const routeTree = rootRouteImport
