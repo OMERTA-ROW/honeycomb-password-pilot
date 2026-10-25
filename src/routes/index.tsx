@@ -21,7 +21,7 @@ function Index() {
         </div>
         <Button asChild className="btn-primary"><Link to="/accounts">Start a password update batch →</Link></Button>
       </section>
-      <div className="grid gap-4 md:grid-cols-3">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <Card title="Devices" value={`${sampleDevices.length} enrolled`} note={stale ? `${stale} stale check-in` : "All current"} to="/devices" />
         <Card title="Digital Honey Pack" value="1 decoy alert" note="Review observed events" to="/honey-pack" />
         <Card title="Recovery" value="Ready" note="Use from another device" to="/recovery" />
