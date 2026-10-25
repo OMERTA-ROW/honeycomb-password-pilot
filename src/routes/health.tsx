@@ -16,8 +16,9 @@ function Page() {
   const [open, setOpen] = useState<string | null>(null);
   const [suggested, setSuggested] = useState<Record<string, string>>({});
   const [saved, setSaved] = useState<Set<string>>(new Set());
-  const s = summarize(sampleHealth.map((a) => (done.has(a.id) ? { ...a, weak: false, breached: false, reuseGroup: undefined } : a)));
-  const queue = fixNextQueue(sampleHealth, done);
+  const current = sampleHealth.map((a) => (done.has(a.id) ? { ...a, weak: false, breached: false, reuseGroup: undefined } : a));
+  const s = summarize(current);
+  const queue = fixNextQueue(current, done);
 
   const start = (id: string) => {
     setOpen(id);
