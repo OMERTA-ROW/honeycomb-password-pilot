@@ -1,15 +1,17 @@
 import { Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
+import { Activity, KeyRound, Hexagon, LifeBuoy, Monitor, NotebookPen, FileDown, ListChecks, LockKeyhole } from "lucide-react";
+import { HiveBackdrop } from "@/components/HiveBackdrop";
 
 const nav = [
-  { to: "/", label: "Status" },
-  { to: "/accounts", label: "Password batches" },
-  { to: "/honey-pack", label: "Digital Honey Pack" },
-  { to: "/recovery", label: "Recovery" },
-  { to: "/devices", label: "Devices" },
-  { to: "/incident-notes", label: "Incident notes" },
-  { to: "/evidence", label: "Evidence export" },
-  { to: "/roadmap", label: "Roadmap & pricing" },
+  { to: "/", label: "Status", icon: Activity },
+  { to: "/accounts", label: "Password batches", icon: KeyRound },
+  { to: "/honey-pack", label: "Digital Honey Pack", icon: Hexagon },
+  { to: "/recovery", label: "Recovery", icon: LifeBuoy },
+  { to: "/devices", label: "Devices", icon: Monitor },
+  { to: "/incident-notes", label: "Incident notes", icon: NotebookPen },
+  { to: "/evidence", label: "Evidence export", icon: FileDown },
+  { to: "/roadmap", label: "Roadmap & pricing", icon: ListChecks },
 ] as const;
 
 export function Hex({ className = "h-7 w-7" }: { className?: string }) {
@@ -23,8 +25,10 @@ export function Hex({ className = "h-7 w-7" }: { className?: string }) {
 
 export function VaultShell({ children, showPromo = false }: { children: ReactNode; showPromo?: boolean }) {
   return (
-    <div className="min-h-screen md:flex">
-      <aside className="border-b md:w-64 md:shrink-0 md:border-b-0 md:border-r bg-card/70 p-4">
+    <>
+    <HiveBackdrop />
+    <div className="vault-layout min-h-screen md:flex">
+      <aside className="vault-sidebar min-w-0 border-b md:w-64 md:shrink-0 md:border-b-0 md:border-r p-4 md:py-8">
         <Link to="/" className="flex items-center gap-2 text-primary">
           <Hex />
           <span className="font-semibold tracking-tight text-foreground">Honeycomb Vault</span>
@@ -33,8 +37,9 @@ export function VaultShell({ children, showPromo = false }: { children: ReactNod
         <nav className="mt-5 flex gap-1 overflow-x-auto md:flex-col">
           {nav.map((n) => (
             <Link key={n.to} to={n.to} activeOptions={{ exact: true }}
-              className="whitespace-nowrap rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-secondary"
+              className="vault-nav-link shrink-0 whitespace-nowrap rounded-md px-3 py-2.5 text-sm text-muted-foreground hover:bg-secondary hover:text-foreground"
               activeProps={{ className: "bg-accent text-accent-foreground" }}>
+              <n.icon className="h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
               {n.label}
             </Link>
           ))}
@@ -46,13 +51,19 @@ export function VaultShell({ children, showPromo = false }: { children: ReactNod
           </div>
         )}
       </aside>
-      <main className="flex-1 p-4 md:p-8">
-        <div className="mb-4 rounded-lg border border-warning/40 bg-warning/10 px-3 py-2 text-xs text-warning">
+      <main className="vault-main min-w-0 flex-1">
+        <div className="vault-content">
+        <div className="mb-6 flex items-start gap-2 rounded-md border border-warning/40 bg-card px-3 py-3 text-xs leading-relaxed text-warning">
+          <LockKeyhole className="mt-0.5 h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+          <span>
           Private preview · Simulation only · Sample data · No real passwords are stored or changed.
+          </span>
         </div>
         {children}
+        </div>
       </main>
     </div>
+    </>
   );
 }
 
