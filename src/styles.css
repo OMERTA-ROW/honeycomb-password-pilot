@@ -43,7 +43,7 @@
   --card-foreground: var(--foreground);
   --popover: oklch(0.15 0 0);
   --popover-foreground: var(--foreground);
-  --primary: oklch(0.79 0.115 85);
+  --primary: oklch(0.8 0.12 78);
   --primary-foreground: oklch(0.12 0 0);
   --secondary: oklch(0.18 0.006 85);
   --secondary-foreground: var(--foreground);
@@ -56,12 +56,12 @@
   --success: oklch(0.72 0.14 150);
   --warning: oklch(0.8 0.15 85);
   --info: oklch(0.72 0.1 230);
-  --border: oklch(0.48 0.07 85);
+  --border: oklch(0.5 0.08 78);
   --input: oklch(0.52 0.07 85);
   --ring: var(--primary);
-  --hive-gold-deep: oklch(0.4 0.07 85);
-  --hive-gold-soft: oklch(0.6 0.1 85);
-  --hive-gold-bright: oklch(0.88 0.11 88);
+  --hive-gold-deep: oklch(0.36 0.07 70);
+  --hive-gold-soft: oklch(0.58 0.11 72);
+  --hive-gold-bright: oklch(0.86 0.13 80);
 }
 
 @layer base {
@@ -99,7 +99,7 @@
 .hive-edge { position: absolute; top: 0; width: 520px; height: 100%; opacity: 1; mask-image: linear-gradient(to right, black 52%, transparent 97%); }
 .hive-edge-left { left: 0; }
 .hive-edge-right { right: 0; transform: scaleX(-1); }
-.hive-cell { stroke-width: 1.5; }
+.hive-cell { stroke-width: 1.3; }
 .hive-nodes { fill: var(--hive-gold-bright); }
 .hive-metal-deep { stop-color: var(--hive-gold-deep); }
 .hive-metal-soft { stop-color: var(--hive-gold-soft); }
