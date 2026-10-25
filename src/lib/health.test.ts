@@ -13,7 +13,7 @@ describe("password health", () => {
     expect(summarize(list)).toMatchObject({ total: 4, weak: 1, reused: 2, breached: 1 });
   });
   it("score is 100 when nothing is wrong", () => {
-    expect(summarize([list[3]]).score).toBe(100);
+    expect(summarize([list[3]!]).score).toBe(100);
   });
   it("breached accounts rank first in Fix Next", () => {
     expect(fixNextQueue(list).map((a) => a.id)).toEqual(["a", "b", "c"]);

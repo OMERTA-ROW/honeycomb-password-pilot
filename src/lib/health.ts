@@ -5,7 +5,7 @@ export interface HealthAccount {
   id: string;
   site: string;
   weak: boolean;
-  reuseGroup?: string; // accounts sharing a group id share the same password
+  reuseGroup?: string | undefined; // accounts sharing a group id share the same password
   breached: boolean; // sample flag; real check (HIBP range API) not built yet
   passkey: boolean; // site advertises passkey support (sample)
 }
