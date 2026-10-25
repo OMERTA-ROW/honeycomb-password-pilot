@@ -35,3 +35,9 @@ export const sampleHealth: HealthAccount[] = [
   { id: "4", site: "forum.example.io", weak: true, breached: false, passkey: false },
   { id: "5", site: "cloud.example.dev", weak: false, breached: false, passkey: true },
 ];
+
+// Fixed, fictional masked references only. Never collect payment credentials.
+export const sampleWalletRecords = [
+  { id: "wallet-demo-android", platform: "Android / Google Wallet", label: "Sample everyday card", masked: "•••• 4242", device: "Sample Pixel Phone" },
+  { id: "wallet-demo-ios", platform: "iOS / Apple Wallet", label: "Sample travel card", masked: "•••• 1234", device: "Sample iPhone" },
+] as const;
