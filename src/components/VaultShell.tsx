@@ -6,6 +6,7 @@ import { HiveBackdrop } from "@/components/HiveBackdrop";
 const nav = [
   { to: "/", label: "Status", icon: Activity },
   { to: "/health", label: "Password health", icon: HeartPulse },
+  { to: "/spam-shield", label: "Spam Shield", icon: ShieldCheck },
   { to: "/accounts", label: "Password batches", icon: KeyRound },
   { to: "/honey-pack", label: "Digital Honey Pack", icon: Hexagon },
   { to: "/recovery", label: "Recovery", icon: LifeBuoy },
