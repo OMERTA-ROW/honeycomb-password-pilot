@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { VaultShell, Hex, meta } from "@/components/VaultShell";
 import { sampleAccounts, sampleDevices } from "@/lib/sample-data";
+import { useTerminalPromo } from "@/hooks/use-terminal-promo";
 
 export const Route = createFileRoute("/")({
   head: () => meta("Status", "Honeycomb Vault private preview — your access, under your control."),
@@ -10,8 +11,9 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   const stale = sampleDevices.filter((d) => d.stale).length;
+  const showPromo = useTerminalPromo();
   return (
-    <VaultShell showPromo>
+    <VaultShell showPromo={showPromo}>
       <section className="panel mb-4 flex flex-col gap-4 md:flex-row md:items-center">
         <Hex className="h-14 w-14 text-primary" />
         <div className="flex-1">
