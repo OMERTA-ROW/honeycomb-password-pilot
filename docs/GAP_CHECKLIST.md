@@ -96,7 +96,9 @@ Evidence references: `src/lib/batch.test.ts` (9 tests), `src/lib/incident-notes.
 | VPN later, outside core | DOC |
 | Malwarebytes affiliate interest only; no application/link/bundle; scanning outside core | DOC (wording added; no external link inserted) |
 | Terminal separate ($20/yr belongs to Terminal plan, not shown in Vault pricing) | IMPL (not mixed) |
-| One-way discreet Terminal card; none in password/security/recovery flows; no Vault ads in Terminal | IMPL — card renders only on Status and Roadmap pages |
+| One-way discreet Terminal card; none in password/security/recovery flows; no Vault ads in Terminal | IMPL — card renders only on Status and Roadmap pages; signed-in owners can hide it via a profile preference |
+| Vault data excluded from data sales / advertising profiles | DOC (policy) | SPEC.md constraint; no analytics or data-sale mechanism exists |
+| Terminal macOS-first pairing, iPhone/iPad acceptance, Android follow-up, scoped device-care, VS Code option | UNBUILT (separate project) | Tracked in the Terminal project; Vault claims no companion download or live remote shell without artifacts/runtime evidence |
 
 ## Open owner inputs (also in PLAN_AUTH_CRYPTO.md)
 - Meaning of "user-created passwords" — preview currently supports both manual entry and preference-based generation.
@@ -112,4 +114,5 @@ Evidence references: `src/lib/batch.test.ts` (9 tests), `src/lib/incident-notes.
 | Session revocation, access history | SIM | In-memory this-page-only Vault state; no wallet transactions controlled |
 | Android/iOS provisioning/NFC | UNBUILT / BLOCKED | Primary-source assessment with unresolved entitlement/provider/region/eligibility; unavailable in web preview |
 | Sensitive payment/biometric data exclusion | IMPL (preview boundary) / DESIGN | Fixed masked data, no payment entry/persistence; real storage/log review required before scope expansion |
+| No payment reversal / tap-to-pay control claims; Demo UI is not active security; passkeys/device biometrics instead of stored biometric templates | DOC | SPEC.md wallet section; docs/WALLET_PROTECTION.md |
 | Real accounts and activity requested | IMPL (partial) / UNVERIFIED | Cloud connected; basic profiles confirmed; SDK auth, owner/active-session RLS, real sessions/activity implemented. Isolation and login/profile/logout browser tests passed; delivery/social/successful recovery unverified. See ACCOUNT_FOUNDATION.md; no SSO or encryption implied |

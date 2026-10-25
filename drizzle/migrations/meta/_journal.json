@@ -15,6 +15,13 @@
       "when": 1792965587895,
       "tag": "0001_restrict_account_function_grants",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1792967870617,
+      "tag": "0002_profile_preferences",
+      "breakpoints": true
     }
   ]
 }

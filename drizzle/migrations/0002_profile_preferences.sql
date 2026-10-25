@@ -1,0 +1,2 @@
+ALTER TABLE public.profiles ADD COLUMN preferences jsonb NOT NULL DEFAULT '{}'::jsonb;
+COMMENT ON COLUMN public.profiles.preferences IS 'Owner-editable basic preferences only (e.g. show_terminal_promo). Never store secrets, credentials or biometric data.';

@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { VaultShell, PageHead, meta } from "@/components/VaultShell";
+import { useTerminalPromo } from "@/hooks/use-terminal-promo";
 
 export const Route = createFileRoute("/roadmap")({
   head: () => meta("Roadmap & pricing", "What works in the preview, what is mocked, and proposed pricing."),
@@ -15,8 +16,9 @@ function List({ title, items, tag }: { title: string; items: string[]; tag: stri
 }
 
 function Page() {
+  const showPromo = useTerminalPromo();
   return (
-    <VaultShell showPromo>
+    <VaultShell showPromo={showPromo}>
       <PageHead title="Roadmap & proposed pricing" sub="Honest status. Key management and recovery require independent security review before launch." />
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <List title="Working in preview" items={working} tag="tag-ok" />

@@ -8,6 +8,8 @@ Separate product from Honeycomb Terminal and Omni/Evolution. Canonical owner pla
 - No real customer passwords, no remote host access.
 - Never log passwords, recovery codes, or exports. Key management/recovery need independent review.
 - No universal site control; no assumed Google Password Manager write-back.
+- Vault user data is never sold or monetized through data sales; no advertising profiles.
+- Honeycomb Terminal is a separate project. Its macOS-first pairing, iPhone/iPad acceptance criteria, Android follow-up, scoped authorized device-care actions and supported-only VS Code connection option are tracked in that project, not built here. Vault makes no downloadable-companion or live-remote-shell claims without actual artifacts and runtime evidence.
 
 ## Brand
 Dark charcoal, warm amber, subtle hexagon vault mark. Tagline: "Your access. Under your control." Simple status + obvious next action.
@@ -40,7 +42,7 @@ Optional discreet Terminal card in Vault menu/companion only; never inside secur
 - Next foundations plan: docs/PLAN_AUTH_CRYPTO.md.
 
 ## Staged Wallet Protection (2026-10-25)
-Owner's “ISO” is assumed iOS/Apple Wallet alongside Android/Google Wallet. Queue after existing work; approval/recovery/review gates unchanged. docs/WALLET_PROTECTION.md records design, primary-source assessment, acceptance and blockers. Preview uses fixed masked sample references only, labelled Demo. Planned native OS Face ID/fingerprint/device-credential unlock and action-bound step-up; never collect biometric images/templates. Planned record encryption is separate from payment provisioning/NFC, which stays unavailable. No card/CVV/PIN/payment-key/token entry or storage. Vault-only revocation and official wallet-control guidance; no transaction interception/control or universal payment approval gate.
+Owner's “ISO” is assumed iOS/Apple Wallet alongside Android/Google Wallet. Queue after existing work; approval/recovery/review gates unchanged. docs/WALLET_PROTECTION.md records design, primary-source assessment, acceptance and blockers. Preview uses fixed masked sample references only, labelled Demo. Planned native OS Face ID/fingerprint/device-credential unlock and action-bound step-up; never collect biometric images/templates. Planned record encryption is separate from payment provisioning/NFC, which stays unavailable. No card/CVV/PIN/payment-key/token entry or storage. Vault-only revocation and official wallet-control guidance; no transaction interception/control, no payment reversal, no tap-to-pay control and no universal payment approval gate. Payment/wallet protection is a future feature requiring genuine provider integration; the current UI is a labelled Demo, not active security. No raw biometric storage — supported passkeys/device biometrics only, never biometric templates.
 
 ## Real account foundation request (2026-10-25)
 Lovable Cloud provisioned via supported tool flow; owner confirmed basic profiles. SDK signup/login/logout/reset and social entrypoints, display name, registered session list/revocation and server-timestamped limited activity implemented. Owner plus active-session RLS and real isolation tests passed. Default auth sender applies; delivery, social round trips and successful recovery unverified, no custom domain configured. See docs/ACCOUNT_FOUNDATION.md for partial scope and gates. Authentication is not vault encryption; real secrets remain prohibited. Terminal identity sharing is future separately authorized design, no SSO.
