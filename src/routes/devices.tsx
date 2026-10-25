@@ -13,7 +13,7 @@ function Page() {
     <VaultShell>
       <PageHead title="Enrolled devices" tag={<span className="tag-sim">Sample data</span>}
         sub="Each device would hold its own cryptographic identity and send authenticated check-ins." />
-      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+      <div className="grid gap-4 sm:grid-cols-2">
         {sampleDevices.map((d) => (
           <div key={d.id} className="panel text-sm space-y-1">
             <div className="flex items-center gap-2"><span className="font-medium">{d.name}</span>{d.stale ? <span className="tag-bad">stale</span> : <span className="tag-ok">current</span>}</div>
