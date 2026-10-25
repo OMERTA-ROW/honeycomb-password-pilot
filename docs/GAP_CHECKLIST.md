@@ -19,7 +19,7 @@ Evidence references: `src/lib/batch.test.ts` (9 tests), `src/lib/incident-notes.
 ## Proposed experience (steps 1–6)
 | Step | Status | Note |
 |---|---|---|
-| 1 Unlock app, connect supported account sources | UNBUILT | Status shows "Locked" (mock). No unlock, no sources. Listed under Mocked/Not implemented on Roadmap. |
+| 1 Unlock app, connect supported account sources | UNBUILT (vault) | Real account identity added separately; Status shows vault "Locked" (mock). No encrypted unlock or sources. |
 | 2 Choose unique replacement or approve generation prefs | SIM | Weak/reused/variation issues shown in preview. |
 | 3 Preview and authorize | SIM | |
 | 4 Apply changes; pause for verification/MFA | SIM | No site is contacted. |
@@ -65,7 +65,7 @@ Evidence references: `src/lib/batch.test.ts` (9 tests), `src/lib/incident-notes.
 | Requirement | Status |
 |---|---|
 | Phones/iPads/computers via supported capabilities | DOC |
-| Recovery from another device, auth not solely on lost device | SIM (UI) / UNBUILT (auth) |
+| Recovery from another device, auth not solely on lost device | SIM (vault recovery UI); account identity partial, successful emailed recovery unverified |
 | Revoke future access; OS lock guidance; no whole-device control | SIM / DOC |
 | Local encryption + auto-lock for downloaded data; no recall of exposed secrets | DOC / UNBUILT |
 | Confirmed/pending/offline/failed shown distinctly | SIM |

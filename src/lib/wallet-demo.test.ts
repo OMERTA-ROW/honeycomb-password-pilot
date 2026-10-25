@@ -17,6 +17,8 @@ describe("Wallet simulation boundaries", () => {
   it.each(["canceled", "failed", "lockout", "unsupported"] as const)("denies %s authentication", outcome => {
     const approved = approveWalletDemo(initialWalletDemo, "unlock", outcome, 100);
     expect(performWalletDemo(approved, "unlock", 101).unlockedUntil).toBe(0);
+    const unlocked = performWalletDemo(approveWalletDemo(initialWalletDemo, "unlock", "success", 100), "unlock", 101);
+    expect(performWalletDemo(approveWalletDemo(unlocked, "revoke-vault-session", outcome, 102), "revoke-vault-session", 103).revoked).toBe(false);
   });
   it("allows simulated secure device credential fallback", () => {
     const state = performWalletDemo(approveWalletDemo(initialWalletDemo, "unlock", "fallback", 100), "unlock", 101);

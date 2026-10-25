@@ -1,6 +1,6 @@
 # Next Implementation Plan — Sign-in, Vault Encryption, Key Management, Recovery
 
-Status: **PLAN ONLY.** Nothing here is implemented. Preview stays sample-data-only and accepts no real passwords until every gate below passes.
+Status: **VAULT CRYPTO PLAN ONLY.** Real account identity was later added (see §9), but encrypted vault/native enrollment/recovery foundations remain unbuilt. Vault preview stays sample-data-only and accepts no real vault passwords until every gate below passes.
 
 ## 0. Principle
 Sign-in proves *who is talking to the server*. It does **not** protect vault secrets. Vault contents must be encrypted on the device with keys the server never holds; a fully compromised server or account database must reveal only ciphertext.
@@ -77,7 +77,7 @@ Recommended start: A + B. No server-held escrow (would break "server cannot decr
 6. Sign-in methods: passkey + TOTP? Allow email/password sign-in at all? Google sign-in?
 7. Which metadata must be encrypted (site names, usernames, timestamps)?
 8. Budget and vendor for independent security review (paid service — needs separate authorization).
-9. Authorization to enable Lovable Cloud (database/auth) for step 2 — not enabled now.
+9. Lovable Cloud provisioning for real accounts — completed 2026-10-25; this does not resolve encryption/recovery/review decisions.
 
 ## 9. Wallet and account addenda (2026-10-25)
 Cloud was provisioned for the new real-account request; owner confirmed basic profiles. Account identity/profile/session/activity foundation is implemented and isolation-tested (docs/ACCOUNT_FOUNDATION.md), but step 2's cryptographic enrollment/passkey/TOTP plan is not complete. Tools confirmed email confirmation and enabled providers; delivery/social/successful recovery and detailed hosted policy remain unverified. Preserve recovery choice, data-loss, metadata and independent-review decisions; no real vault secrets. Future authorized shared Terminal identity must be designed separately; no SSO exists.

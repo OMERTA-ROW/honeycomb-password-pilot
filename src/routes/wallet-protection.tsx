@@ -52,7 +52,8 @@ function WalletProtection() {
     const next = performWalletDemo(state, action, time);
     setState(next);
     setNow(time);
-    const success = action === "unlock" ? canViewWalletDemo(next, time) : next.revoked && !state.revoked;
+    const hadApproval = state.approval?.action === action && time < state.approval.expiresAt;
+    const success = hadApproval && (action === "unlock" ? canViewWalletDemo(next, time) : next.revoked && !state.revoked);
     setMessage(success ? action === "unlock" ? "Demo: sample records unlocked for 60 seconds. No biometric was collected." : "Demo: this sample Vault session revoked. Apple/Google Wallet cards and payments are unchanged." : "Demo: access denied. Fresh approval for this exact action is required.");
     record(success ? `Sample ${action} completed` : "Sample action denied");
   }
