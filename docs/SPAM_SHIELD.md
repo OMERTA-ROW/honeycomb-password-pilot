@@ -40,3 +40,6 @@ No provider connection, native artifact, message storage, account schema change,
 
 ## Acceptance
 Pure policy tests cover marketing quarantine, protected codes/important messages under block, restore, allow/unblock, independent channel controls, explicit trusted unsubscribe, suspicious denial, Quiet Mode and never-active Demo health. Browser checks must cover restore/readback, block/allowlist, channel toggles, confirmation/cancel, quiet and reduced-motion behavior at desktop/tablet/phone sizes. Native/provider health and real notification delivery remain unverified.
+
+### Preview checks completed 2026-10-25
+All 49 ordinary tests passed, including 10 new Spam Shield rules; the existing opt-in Cloud isolation integration was skipped, as account logic/schema were not changed. Automatic build reported OK. Playwright exercised restore to Inbox, blocked-sender code protection, allowlist/unblock, unsubscribe cancel/confirm, SMS channel off with email still quarantined, Quiet Mode and retained important notices, short animation completion and reduced-motion disablement. No page errors or horizontal page overflow at 1280/834/390/320; desktop/tablet/320px screenshots inspected. Live native/provider filtering, cross-device sync, OS notifications and launch/boot behavior are unbuilt and unverified.

@@ -1,9 +1,9 @@
 # Implementation checklist
 
 ## Spam Shield (owner, 2026-10-25)
-- [ ] Sample-only quarantine, sender rules, protected messages, channel controls and explicit safe unsubscribe.
-- [ ] Optional Quiet Mode and reduced-motion-aware mechanical hive visual.
-- [ ] Document native/email scope, health gates and cross-device startup constraints; run tests and responsive demo flows.
+- [x] Sample-only quarantine, sender rules, protected messages, channel controls and explicit safe unsubscribe; /spam-shield and 10 policy tests.
+- [x] Optional Quiet Mode and reduced-motion-aware mechanical hive visual; opt-in short playback, static with reduced motion.
+- [x] Document native/email scope, health gates and cross-device startup constraints in docs/SPAM_SHIELD.md; 49 ordinary tests passed (1 existing Cloud integration skipped), automatic build OK. Browser restore/readback, block/code protection, allowlist/unblock, unsubscribe cancel/confirm, channel toggles, Quiet Mode, timeout/reduced motion passed at 1280/834/390/320 with no page errors/overflow; desktop/tablet/320 screenshots inspected.
 - [ ] Real SMS/email integration — blocked on platform/provider selection, permissions, native implementation and review; no connection authorized by demo request.
 
 ## Current visual update
