@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { VaultShell, Hex, meta } from "@/components/VaultShell";
 import { sampleAccounts, sampleDevices } from "@/lib/sample-data";
@@ -18,7 +19,7 @@ function Index() {
           <h1 className="text-2xl font-semibold">Locked · {sampleAccounts.length} sample accounts</h1>
           <p className="text-sm text-muted-foreground">Your access. Under your control.</p>
         </div>
-        <Link to="/accounts" className="btn-primary">Start a password update batch →</Link>
+        <Button asChild className="btn-primary"><Link to="/accounts">Start a password update batch →</Link></Button>
       </section>
       <div className="grid gap-4 md:grid-cols-3">
         <Card title="Devices" value={`${sampleDevices.length} enrolled`} note={stale ? `${stale} stale check-in` : "All current"} to="/devices" />
