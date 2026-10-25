@@ -9,21 +9,23 @@ describe.skipIf(!enabled)("Real account isolation and revocation", () => {
     const secret = process.env['SUPABASE_SERVICE_ROLE_KEY'];
     const key = process.env['SUPABASE_PUBLISHABLE_KEY'];
     if (!url || !secret || !key) throw new Error("Integration configuration missing");
-    const admin = createClient(url, secret, { auth: { persistSession: false, autoRefreshToken: false } });
-    const anon = createClient(url, key, { auth: { persistSession: false, autoRefreshToken: false } });
+    const admin = createClient(url, secret, { auth: { storageKey: "test-admin", persistSession: false, autoRefreshToken: false } });
+    const anon = createClient(url, key, { auth: { storageKey: "test-anon", persistSession: false, autoRefreshToken: false } });
     const ids: string[] = [];
-    const clients = [0, 1].map(() => createClient(url, key, { auth: { persistSession: false, autoRefreshToken: false } }));
+    const clients = [0, 1].map(i => createClient(url, key, { auth: { storageKey: `test-owner-${i}`, persistSession: false, autoRefreshToken: false } })) as [ReturnType<typeof createClient>, ReturnType<typeof createClient>];
     const sessions: string[] = [];
     try {
       for (let i = 0; i < 2; i++) {
+        const client = clients[i];
+        if (!client) throw new Error("Test client missing");
         const email = `vault-isolation-${crypto.randomUUID()}@example.com`;
         const password = `Test-${crypto.randomUUID()}-9!`;
         const created = await admin.auth.admin.createUser({ email, password, email_confirm: true });
         if (created.error || !created.data.user) throw new Error("Test user creation failed");
         ids.push(created.data.user.id);
-        const signed = await clients[i].auth.signInWithPassword({ email, password });
+        const signed = await client.auth.signInWithPassword({ email, password });
         expect(signed.error).toBeNull();
-        const registered = await clients[i].rpc("register_account_session");
+        const registered = await client.rpc("register_account_session");
         expect(registered.error).toBeNull();
         sessions.push(registered.data);
       }
