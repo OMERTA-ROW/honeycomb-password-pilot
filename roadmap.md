@@ -29,7 +29,7 @@
 - [x] Sign-in/encryption/recovery plan (docs/PLAN_AUTH_CRYPTO.md)
 
 ## Blocked on owner input
-- [ ] Answers to the 9 owner inputs in docs/PLAN_AUTH_CRYPTO.md §8
+- [ ] Remaining encryption/recovery/browser/site/metadata/review owner inputs in docs/PLAN_AUTH_CRYPTO.md §8; Cloud provisioning resolved, no encryption approval inferred
 - [x] Lovable Cloud provisioning completed for requested account foundation
 - [ ] Authorization for AI incident notes remains pending
 

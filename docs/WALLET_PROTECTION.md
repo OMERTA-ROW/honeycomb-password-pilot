@@ -45,3 +45,6 @@ Unlock records using OS authentication and device-backed key access. Sensitive V
 | Review before real enablement | Independent security + provider architecture/compliance reviews, approved platforms/regions/partners, end-to-end tests and owner authorization required. No real integration switch exists. |
 
 No real security acceptance criterion is marked complete based on a simulation test.
+
+## Preview verification
+Final suite: 40 tests passed, including 13 wallet boundary tests and one real account isolation integration test. Automatic build OK. Browser exercised locked denial, canceled authorization, device-credential Demo fallback, action-specific step-up, sample Vault revocation/reset and 60-second timeout auto-lock. New pages checked at 1280/834/390/320px without horizontal overflow; screenshots visually inspected. No native biometric/payment integration tested, and no real credentials or payments handled. Remaining fidelity/platform uncertainty: other browsers/physical devices and primary-doc gated bodies/app-specific eligibility.
