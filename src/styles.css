@@ -96,9 +96,11 @@
 @utility tag-muted { @apply tag text-muted-foreground; }
 
 .hive-backdrop { position: fixed; inset: 0; overflow: hidden; z-index: 0; }
-.hive-edge { position: absolute; top: 0; width: 330px; height: 100%; opacity: 0.65; mask-image: linear-gradient(to right, var(--foreground), transparent); }
+.hive-edge { position: absolute; top: 0; width: 460px; height: 100%; opacity: 0.9; mask-image: linear-gradient(to right, black 45%, transparent 96%); }
 .hive-edge-left { left: 0; }
 .hive-edge-right { right: 0; transform: scaleX(-1); }
+.hive-cell { stroke-width: 1.15; }
+.hive-metal-deep { stop-color: var(--hive-gold-deep); }
 .hive-metal-soft { stop-color: var(--hive-gold-soft); }
 .hive-metal-bright { stop-color: var(--hive-gold-bright); }
 .vault-layout { position: relative; z-index: 1; }
