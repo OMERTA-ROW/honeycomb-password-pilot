@@ -1,7 +1,7 @@
 # Implementation checklist
 
 ## Current visual update
-- [ ] Apply owner-approved black-and-gold edge-hive styling across all pages; check desktop/mobile and existing preview flows (no publishing or access changes).
+- [x] Apply owner-approved black-and-gold edge-hive styling across all eight pages; automatic build OK, 15 existing tests passed, browser checks at 1280/390/320px found no horizontal page overflow or runtime errors; simulated batch/MFA, disabled AI screening and sample export verified (no publishing or access changes).
 
 ## Done (preview, simulated)
 - [x] Branding, responsive shell, status page with next action

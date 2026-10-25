@@ -101,7 +101,7 @@
 .hive-metal-soft { stop-color: var(--hive-gold-soft); }
 .hive-metal-bright { stop-color: var(--hive-gold-bright); }
 .vault-layout { position: relative; z-index: 1; }
-.vault-sidebar { background: color-mix(in oklab, var(--background) 88%, transparent); }
+.vault-sidebar { background: color-mix(in oklab, var(--background) 45%, transparent); }
 .vault-content { width: 100%; max-width: 1200px; margin-inline: auto; }
 .vault-nav-link { display: flex; align-items: center; gap: 0.75rem; border: 1px solid transparent; }
 .vault-nav-link[aria-current="page"] { border-color: var(--border); }
@@ -118,4 +118,5 @@
   .vault-main .panel { padding: 1rem; }
   .vault-main h1 { font-size: 1.375rem; }
   .vault-main .flex:not(nav) { flex-wrap: wrap; }
+  .vault-main .vault-content > div:first-child { flex-wrap: nowrap; }
 }
