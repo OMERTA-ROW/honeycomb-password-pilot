@@ -1,22 +1,23 @@
-// Large interlocking outlined hexagonal hive cells along both edges.
-// Black empty interiors, metallic champagne-gold strokes, bright junction nodes.
-const R = 96; // hex "radius" (center to vertex)
-const W = R * 1.74; // flat-top hex width step
+// Interlocking pointy-top hive cells along both edges, matched to the approved mockup:
+// black empty interiors, warm champagne-amber strokes, brighter glowing junctions.
+const R = 74; // center to vertex
+const W = Math.sqrt(3) * R; // pointy-top hex width = horizontal step
 const H = R * 1.5; // vertical step between rows
 
-const cells = Array.from({ length: 4 }, (_, column) =>
-  Array.from({ length: 8 }, (_, row) => {
-    const x = column * W * 0.75 + 40;
-    const y = row * H + (column % 2 ? H / 2 : 0) + 60;
-    return { x, y };
-  }),
+const cells = Array.from({ length: 11 }, (_, row) =>
+  Array.from({ length: 4 }, (_, column) => ({
+    x: column * W + (row % 2 ? W / 2 : 0) + 20,
+    y: row * H + 30,
+  })),
 ).flat();
 
 const polygon = (x: number, y: number) =>
   `${x},${y - R} ${x + W / 2},${y - R / 2} ${x + W / 2},${y + R / 2} ${x},${y + R} ${x - W / 2},${y + R / 2} ${x - W / 2},${y - R / 2}`;
 
-// Bright gold junctions at selected shared vertices (top vertex of every other cell).
-const nodes = cells.filter((_, i) => i % 2 === 0).map(({ x, y }) => ({ x, y: y - R }));
+// Junction glow on shared vertices (top and upper-right vertex of each cell).
+const nodes = cells.flatMap(({ x, y }, i) =>
+  i % 3 === 0 ? [{ x, y: y - R }, { x: x + W / 2, y: y - R / 2 }] : [{ x, y: y - R }],
+);
 
 export function HiveBackdrop() {
   return (
@@ -32,7 +33,7 @@ export function HiveBackdrop() {
               <stop offset="1" className="hive-metal-deep" />
             </linearGradient>
             <filter id={`hive-glow-${edge}`} x="-40%" y="-40%" width="180%" height="180%">
-              <feGaussianBlur stdDeviation="3" result="blur" />
+              <feGaussianBlur stdDeviation="2.6" result="blur" />
               <feMerge>
                 <feMergeNode in="blur" />
                 <feMergeNode in="SourceGraphic" />
@@ -46,7 +47,7 @@ export function HiveBackdrop() {
           </g>
           <g className="hive-nodes" filter={`url(#hive-glow-${edge})`}>
             {nodes.map(({ x, y }, index) => (
-              <circle key={index} cx={x} cy={y} r="3.4" />
+              <circle key={index} cx={x} cy={y} r="2.6" />
             ))}
           </g>
         </svg>
