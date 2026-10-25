@@ -102,3 +102,14 @@ Evidence references: `src/lib/batch.test.ts` (9 tests), `src/lib/incident-notes.
 - Meaning of "user-created passwords" — preview currently supports both manual entry and preference-based generation.
 - First supported desktop browser(s) and first supported websites.
 - Vault/sync architecture choice and recovery strategy (see plan options).
+
+## Wallet and accounts addenda (2026-10-25)
+| Requirement | Status | Evidence / gate |
+|---|---|---|
+| Wallet Protection submitted and queued without bypassing pauses | DOC | SPEC.md, roadmap.md, docs/WALLET_PROTECTION.md |
+| Masked sample references, locked view, unlock/auto-lock | SIM | /wallet-protection; wallet-demo.test.ts; not real encryption/auth |
+| Native biometrics, device fallback, action-specific step-up | DESIGN / SIM / BLOCKED | OS API references + demo outcome/action/expiry tests; no biometric collection; native implementation/review unbuilt |
+| Session revocation, access history | SIM | In-memory this-page-only Vault state; no wallet transactions controlled |
+| Android/iOS provisioning/NFC | UNBUILT / BLOCKED | Primary-source assessment with unresolved entitlement/provider/region/eligibility; unavailable in web preview |
+| Sensitive payment/biometric data exclusion | IMPL (preview boundary) / DESIGN | Fixed masked data, no payment entry/persistence; real storage/log review required before scope expansion |
+| Real accounts and activity requested | SUBMITTED / BLOCKED | Cloud connected; awaiting profile decision and implementation/configuration verification; no SSO or encryption implied |
