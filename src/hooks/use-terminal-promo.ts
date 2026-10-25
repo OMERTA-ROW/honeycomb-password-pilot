@@ -16,7 +16,7 @@ export function useTerminalPromo() {
       if (!active) return;
       if (error || !data) { setShow(true); return; }
       const prefs = data.preferences as Record<string, unknown> | null;
-      setShow(prefs?.show_terminal_promo !== false);
+      setShow(prefs?.["show_terminal_promo"] !== false);
     })();
     return () => { active = false; };
   }, [user, sessionId]);
