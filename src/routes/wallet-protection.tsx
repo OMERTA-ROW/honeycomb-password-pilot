@@ -65,8 +65,8 @@ function WalletProtection() {
     </div>
     <section className="mb-6 border-y py-5">
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3"><h2 className="font-medium">Sample record access</h2><span className={visible ? "tag-ok" : "tag-sim"}>Demo · {state.revoked ? "session revoked" : visible ? "unlocked" : "locked"}</span></div>
-      <div className="grid gap-4 xl:grid-cols-2">
-        <div className="space-y-3 text-sm">
+      <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
+        <div className="min-w-0 space-y-3 text-sm">
           <label className="block">Proposed Vault action<select aria-label="Proposed Vault action" value={action} onChange={e => { setAction(e.target.value as DemoAction); setState(s => ({ ...s, approval: null })); }} className="mt-1 block w-full rounded-md border bg-background px-3 py-2"><option value="unlock">Unlock sample records</option><option value="revoke-vault-session">Revoke this sample Vault session</option></select></label>
           <label className="block">Demo authentication outcome<select aria-label="Demo authentication outcome" value={outcome} onChange={e => { setOutcome(e.target.value as DemoOutcome); setState(s => ({ ...s, approval: null })); }} className="mt-1 block w-full rounded-md border bg-background px-3 py-2">{outcomes.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}</select></label>
           <div className="flex flex-wrap gap-2"><Button onClick={approve} disabled={state.revoked}><Fingerprint />Demo authorize</Button><Button onClick={execute} disabled={state.revoked}>Demo perform action</Button><Button variant="outline" onClick={() => { setState(lockWalletDemo(state)); setMessage("Demo: sample records locked; approvals cleared."); record("Sample manual lock"); }} disabled={!visible}><LockKeyhole />Lock Demo</Button>{state.revoked && <Button variant="outline" onClick={() => { setState(initialWalletDemo); setMessage("Demo reset: locked. No real session was restored."); }}>Reset Demo</Button>}</div>
