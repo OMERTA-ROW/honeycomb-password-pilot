@@ -62,7 +62,7 @@ function AccountPage() {
       await client.invalidateQueries({ queryKey: ["account-private"] });
     } catch { setMessage(accountError()); } finally { setBusy(false); }
   }
-  return <VaultShell><PageHead title="Account & security" sub="Real account settings, separate from Demo vault and wallet records. Signing in does not encrypt or unlock vault contents." />
+  return <VaultShell accountMode><PageHead title="Account & security" sub="Real account settings, separate from Demo vault and wallet records. Signing in does not encrypt or unlock vault contents." />
     {!ready ? <p>Checking account…</p> : !user ? <div className="space-y-3"><p role="status">{error || "Sign in to access private account records."}</p><Button asChild><Link to="/auth">Sign in / create account</Link></Button></div> : <>
       <div className="mb-6 flex flex-wrap items-center justify-between gap-3"><div><p>{user.email}</p><span className="tag-ok">Real account · {user.email_confirmed_at ? "email verified" : "email not verified"}</span></div><Button variant="outline" onClick={signOut} disabled={busy}>Sign out</Button></div>
       {account.isPending ? <p>Loading private account records…</p> : account.isError ? <p role="alert" className="text-warning">Account data unavailable. Your session may be expired or revoked; sign in again.</p> : account.data && <>

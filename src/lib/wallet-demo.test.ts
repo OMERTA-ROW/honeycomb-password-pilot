@@ -1,7 +1,15 @@
 import { describe, expect, it } from "vitest";
 import { approveWalletDemo, canViewWalletDemo, DEMO_APPROVAL_MS, DEMO_UNLOCK_MS, initialWalletDemo, lockWalletDemo, performWalletDemo, walletTapToPayAvailable } from "./wallet-demo";
+import { sampleWalletRecords } from "./sample-data";
 
 describe("Wallet simulation boundaries", () => {
+  it("contains only fixed masked references, no sensitive payment fields", () => {
+    for (const record of sampleWalletRecords) {
+      expect(Object.keys(record).sort()).toEqual(["device", "id", "label", "masked", "platform"]);
+      expect(record.masked).toMatch(/^•••• \d{4}$/);
+      expect(JSON.stringify(record)).not.toMatch(/\d{12,19}/);
+    }
+  });
   it("denies locked and unapproved access", () => {
     expect(canViewWalletDemo(initialWalletDemo, 100)).toBe(false);
     expect(performWalletDemo(initialWalletDemo, "unlock", 100).unlockedUntil).toBe(0);

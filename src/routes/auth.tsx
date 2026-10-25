@@ -36,7 +36,7 @@ function AuthPage() {
     setBusy(true); setMessage("");
     try { const result = await lovable.auth.signInWithOAuth(provider, { redirect_uri: window.location.origin + "/auth" }); if (result.error) setMessage(accountError()); } catch { setMessage(accountError()); } finally { setBusy(false); }
   }
-  return <VaultShell><PageHead title="Account access" sub="Real account identity. Vault and Wallet Protection still use Demo records; authentication is not vault encryption." />
+  return <VaultShell accountMode><PageHead title="Account access" sub="Real account identity. Vault and Wallet Protection still use Demo records; authentication is not vault encryption." />
     {!ready ? <p>Checking account…</p> : user ? <div className="space-y-3"><p>Signed in as {user.email}</p><Button asChild><Link to="/account">Account & security</Link></Button></div> : <div className="max-w-lg space-y-5">
       {error && <p role="alert" className="text-warning">{error}</p>}
       <div className="flex flex-wrap gap-2" aria-label="Account access mode">{(["login", "signup", "reset"] as const).map(m => <Button key={m} variant={mode === m ? "default" : "outline"} onClick={() => { setMode(m); setMessage(""); setPassword(""); }} aria-pressed={mode === m}>{m === "login" ? "Sign in" : m === "signup" ? "Create account" : "Forgot password"}</Button>)}</div>
