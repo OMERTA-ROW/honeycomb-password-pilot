@@ -1,5 +1,11 @@
 # Implementation checklist
 
+## Spam Shield (owner, 2026-10-25)
+- [ ] Sample-only quarantine, sender rules, protected messages, channel controls and explicit safe unsubscribe.
+- [ ] Optional Quiet Mode and reduced-motion-aware mechanical hive visual.
+- [ ] Document native/email scope, health gates and cross-device startup constraints; run tests and responsive demo flows.
+- [ ] Real SMS/email integration — blocked on platform/provider selection, permissions, native implementation and review; no connection authorized by demo request.
+
 ## Current visual update
 - [x] Apply owner-approved black-and-gold edge-hive styling across all eight pages; automatic build OK, 15 existing tests passed, browser checks at 1280/390/320px found no horizontal page overflow or runtime errors; simulated batch/MFA, disabled AI screening and sample export verified (no publishing or access changes).
 
