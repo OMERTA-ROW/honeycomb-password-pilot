@@ -112,4 +112,4 @@ Evidence references: `src/lib/batch.test.ts` (9 tests), `src/lib/incident-notes.
 | Session revocation, access history | SIM | In-memory this-page-only Vault state; no wallet transactions controlled |
 | Android/iOS provisioning/NFC | UNBUILT / BLOCKED | Primary-source assessment with unresolved entitlement/provider/region/eligibility; unavailable in web preview |
 | Sensitive payment/biometric data exclusion | IMPL (preview boundary) / DESIGN | Fixed masked data, no payment entry/persistence; real storage/log review required before scope expansion |
-| Real accounts and activity requested | SUBMITTED / BLOCKED | Cloud connected; awaiting profile decision and implementation/configuration verification; no SSO or encryption implied |
+| Real accounts and activity requested | IMPL (partial) / UNVERIFIED | Cloud connected; basic profiles confirmed; SDK auth, owner/active-session RLS, real sessions/activity implemented. Isolation and login/profile/logout browser tests passed; delivery/social/successful recovery unverified. See ACCOUNT_FOUNDATION.md; no SSO or encryption implied |

@@ -7,7 +7,7 @@ Owner requests: 2026-10-25, including biometric authorization addendum. â€œISOâ€
 - **Design:** permitted-record encryption and native action-specific authentication; no integration selected.
 - **Demo:** fixed masked fictional records; transient sample unlock/lock, action approval, fallback/denial/lockout/unsupported outcomes, 60-second auto-lock and 15-second one-action approval, Vault-only session revocation and in-memory history.
 - **Implemented:** preview UI and pure simulation rules only. No real security, persistence, NFC or biometrics.
-- **Blocked:** native app implementation, Cloud-backed real accounts, reviewed encryption/recovery, platform/provider/entitlement/region eligibility, compliance review and end-to-end native tests. Cloud has since been provisioned for the separately requested account foundation; this does not activate wallet integrations.
+- **Blocked:** native app implementation, reviewed encryption/recovery, platform/provider/entitlement/region eligibility, compliance review and end-to-end native tests. Cloud-backed account foundation is separately implemented (ACCOUNT_FOUNDATION.md); this does not activate wallet integrations or convert sample policy into security.
 
 ## Permitted scope and exclusions
 Record protection is not payment provisioning. Only fixed masked fictional references appear in this preview. Never accept/store/log full card data, CVV, PINs, payment keys, wallet tokens, passwords, face images or biometric templates. No custom face recognition or payment cryptography. Future real permitted records must be explicitly allow-listed and encrypted on-device; sync stores ciphertext only, with no server decryption key. Independent security review remains mandatory.

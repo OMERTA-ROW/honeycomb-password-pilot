@@ -15,3 +15,4 @@
 - Docs: docs/GAP_CHECKLIST.md tracks each canonical requirement status; docs/PLAN_AUTH_CRYPTO.md is the gated security plan — update both when scope changes; no custom crypto, vetted libraries only.
 - Shared visual styling belongs in src/styles.css and VaultShell; decorative geometry lives in HiveBackdrop with no interaction or accessibility exposure — keeps all preview pages consistent without changing simulation logic.
 - Wallet simulation policy belongs in src/lib/wallet-demo.ts with fixed masked samples in sample-data.ts and transient page state only — keeps demo approvals distinct from real auth, cryptography, payments and audit storage.
+- Real account records use Cloud SDK and owner-plus-active-session RLS with server-timestamped allow-listed activity; Demo samples stay outside account tables — enforces revocation/isolation without implying vault encryption or device enrollment.
