@@ -1,6 +1,7 @@
 # Implementation checklist
 
 ## Private installation and updates (owner, 2026-10-26)
+- [ ] Finish existing access integration and natural dashboard/account/invitation navigation; copy-only invitation delivery, trusted owner setup; isolated draft tests only, no mail or production fixtures.
 - [ ] PRIORITY: real invitation-only membership, securely bootstrapped owner, expiring/revocable/single-use invitations, server roles and isolated non-secret test records; disable public signup.
 - [ ] Verify owner/member restrictions, invitation lifecycle, isolation/session denial and actual provider quotas; keep encryption/real-secret entry gated.
 - [ ] Manifest, local icons, Install / Updates screen, guarded generated worker and explicit reload.
