@@ -86,18 +86,167 @@ export type Database = {
         }
         Relationships: []
       }
+      test_records: {
+        Row: {
+          created_at: string
+          id: string
+          label: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          label: string
+          user_id?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          label?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "test_records_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      testing_audit: {
+        Row: {
+          actor_id: string | null
+          event: string
+          id: string
+          occurred_at: string
+          subject_id: string | null
+        }
+        Insert: {
+          actor_id?: string | null
+          event: string
+          id?: string
+          occurred_at?: string
+          subject_id?: string | null
+        }
+        Update: {
+          actor_id?: string | null
+          event?: string
+          id?: string
+          occurred_at?: string
+          subject_id?: string | null
+        }
+        Relationships: []
+      }
+      testing_invitations: {
+        Row: {
+          accepted_at: string | null
+          created_at: string
+          created_by: string
+          email: string
+          expires_at: string
+          id: string
+          revoked_at: string | null
+          role: string
+          token_hash: string
+        }
+        Insert: {
+          accepted_at?: string | null
+          created_at?: string
+          created_by: string
+          email: string
+          expires_at: string
+          id?: string
+          revoked_at?: string | null
+          role: string
+          token_hash: string
+        }
+        Update: {
+          accepted_at?: string | null
+          created_at?: string
+          created_by?: string
+          email?: string
+          expires_at?: string
+          id?: string
+          revoked_at?: string | null
+          role?: string
+          token_hash?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "testing_invitations_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_roles: {
+        Row: {
+          active: boolean
+          can_invite: boolean
+          created_at: string
+          role: string
+          user_id: string
+        }
+        Insert: {
+          active?: boolean
+          can_invite?: boolean
+          created_at?: string
+          role: string
+          user_id: string
+        }
+        Update: {
+          active?: boolean
+          can_invite?: boolean
+          created_at?: string
+          role?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_roles_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
+      accept_testing_invitation: {
+        Args: { invite_token_hash: string }
+        Returns: undefined
+      }
       account_session_active: { Args: never; Returns: boolean }
+      manage_testing_member: {
+        Args: {
+          invite_permission: boolean
+          is_active: boolean
+          new_role: string
+          target_user: string
+        }
+        Returns: undefined
+      }
       register_account_session: { Args: never; Returns: string }
       revoke_account_session: {
         Args: { target_id: string }
         Returns: undefined
       }
       revoke_other_account_sessions: { Args: never; Returns: undefined }
+      revoke_testing_invitation: {
+        Args: { target_invite: string }
+        Returns: undefined
+      }
+      testing_inviter: { Args: never; Returns: boolean }
+      testing_member: { Args: never; Returns: boolean }
+      testing_owner: { Args: never; Returns: boolean }
     }
     Enums: {
       [_ in never]: never
