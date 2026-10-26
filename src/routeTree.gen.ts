@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AccountRouteImport } from './routes/account'
 import { Route as AccountsRouteImport } from './routes/accounts'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as DevicesRouteImport } from './routes/devices'
 import { Route as EmergencyAccessRouteImport } from './routes/emergency-access'
 import { Route as EvidenceRouteImport } from './routes/evidence'
@@ -20,6 +21,7 @@ import { Route as HealthRouteImport } from './routes/health'
 import { Route as HoneyPackRouteImport } from './routes/honey-pack'
 import { Route as IncidentNotesRouteImport } from './routes/incident-notes'
 import { Route as JoinRouteImport } from './routes/join'
+import { Route as OwnerSetupRouteImport } from './routes/owner-setup'
 import { Route as RecoveryRouteImport } from './routes/recovery'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as RoadmapRouteImport } from './routes/roadmap'
@@ -46,6 +48,11 @@ const AccountsRoute = AccountsRouteImport.update({
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DevicesRoute = DevicesRouteImport.update({
@@ -81,6 +88,11 @@ const IncidentNotesRoute = IncidentNotesRouteImport.update({
 const JoinRoute = JoinRouteImport.update({
   id: '/join',
   path: '/join',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OwnerSetupRoute = OwnerSetupRouteImport.update({
+  id: '/owner-setup',
+  path: '/owner-setup',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RecoveryRoute = RecoveryRouteImport.update({
@@ -124,6 +136,7 @@ export interface FileRoutesByFullPath {
   '/account': typeof AccountRoute
   '/accounts': typeof AccountsRoute
   '/auth': typeof AuthRoute
+  '/dashboard': typeof DashboardRoute
   '/devices': typeof DevicesRoute
   '/emergency-access': typeof EmergencyAccessRoute
   '/evidence': typeof EvidenceRoute
@@ -131,6 +144,7 @@ export interface FileRoutesByFullPath {
   '/honey-pack': typeof HoneyPackRoute
   '/incident-notes': typeof IncidentNotesRoute
   '/join': typeof JoinRoute
+  '/owner-setup': typeof OwnerSetupRoute
   '/recovery': typeof RecoveryRoute
   '/reset-password': typeof ResetPasswordRoute
   '/roadmap': typeof RoadmapRoute
@@ -144,6 +158,7 @@ export interface FileRoutesByTo {
   '/account': typeof AccountRoute
   '/accounts': typeof AccountsRoute
   '/auth': typeof AuthRoute
+  '/dashboard': typeof DashboardRoute
   '/devices': typeof DevicesRoute
   '/emergency-access': typeof EmergencyAccessRoute
   '/evidence': typeof EvidenceRoute
@@ -151,6 +166,7 @@ export interface FileRoutesByTo {
   '/honey-pack': typeof HoneyPackRoute
   '/incident-notes': typeof IncidentNotesRoute
   '/join': typeof JoinRoute
+  '/owner-setup': typeof OwnerSetupRoute
   '/recovery': typeof RecoveryRoute
   '/reset-password': typeof ResetPasswordRoute
   '/roadmap': typeof RoadmapRoute
@@ -165,6 +181,7 @@ export interface FileRoutesById {
   '/account': typeof AccountRoute
   '/accounts': typeof AccountsRoute
   '/auth': typeof AuthRoute
+  '/dashboard': typeof DashboardRoute
   '/devices': typeof DevicesRoute
   '/emergency-access': typeof EmergencyAccessRoute
   '/evidence': typeof EvidenceRoute
@@ -172,6 +189,7 @@ export interface FileRoutesById {
   '/honey-pack': typeof HoneyPackRoute
   '/incident-notes': typeof IncidentNotesRoute
   '/join': typeof JoinRoute
+  '/owner-setup': typeof OwnerSetupRoute
   '/recovery': typeof RecoveryRoute
   '/reset-password': typeof ResetPasswordRoute
   '/roadmap': typeof RoadmapRoute
@@ -187,6 +205,7 @@ export interface FileRouteTypes {
     | '/account'
     | '/accounts'
     | '/auth'
+    | '/dashboard'
     | '/devices'
     | '/emergency-access'
     | '/evidence'
@@ -194,6 +213,7 @@ export interface FileRouteTypes {
     | '/honey-pack'
     | '/incident-notes'
     | '/join'
+    | '/owner-setup'
     | '/recovery'
     | '/reset-password'
     | '/roadmap'
@@ -207,6 +227,7 @@ export interface FileRouteTypes {
     | '/account'
     | '/accounts'
     | '/auth'
+    | '/dashboard'
     | '/devices'
     | '/emergency-access'
     | '/evidence'
@@ -214,6 +235,7 @@ export interface FileRouteTypes {
     | '/honey-pack'
     | '/incident-notes'
     | '/join'
+    | '/owner-setup'
     | '/recovery'
     | '/reset-password'
     | '/roadmap'
@@ -227,6 +249,7 @@ export interface FileRouteTypes {
     | '/account'
     | '/accounts'
     | '/auth'
+    | '/dashboard'
     | '/devices'
     | '/emergency-access'
     | '/evidence'
@@ -234,6 +257,7 @@ export interface FileRouteTypes {
     | '/honey-pack'
     | '/incident-notes'
     | '/join'
+    | '/owner-setup'
     | '/recovery'
     | '/reset-password'
     | '/roadmap'
@@ -248,6 +272,7 @@ export interface RootRouteChildren {
   AccountRoute: typeof AccountRoute
   AccountsRoute: typeof AccountsRoute
   AuthRoute: typeof AuthRoute
+  DashboardRoute: typeof DashboardRoute
   DevicesRoute: typeof DevicesRoute
   EmergencyAccessRoute: typeof EmergencyAccessRoute
   EvidenceRoute: typeof EvidenceRoute
@@ -255,6 +280,7 @@ export interface RootRouteChildren {
   HoneyPackRoute: typeof HoneyPackRoute
   IncidentNotesRoute: typeof IncidentNotesRoute
   JoinRoute: typeof JoinRoute
+  OwnerSetupRoute: typeof OwnerSetupRoute
   RecoveryRoute: typeof RecoveryRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
   RoadmapRoute: typeof RoadmapRoute
@@ -292,6 +318,13 @@ declare module '@tanstack/react-router' {
       path: '/auth'
       fullPath: '/auth'
       preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/devices': {
@@ -341,6 +374,13 @@ declare module '@tanstack/react-router' {
       path: '/join'
       fullPath: '/join'
       preLoaderRoute: typeof JoinRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/owner-setup': {
+      id: '/owner-setup'
+      path: '/owner-setup'
+      fullPath: '/owner-setup'
+      preLoaderRoute: typeof OwnerSetupRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/recovery': {
@@ -400,6 +440,7 @@ const rootRouteChildren: RootRouteChildren = {
   AccountRoute: AccountRoute,
   AccountsRoute: AccountsRoute,
   AuthRoute: AuthRoute,
+  DashboardRoute: DashboardRoute,
   DevicesRoute: DevicesRoute,
   EmergencyAccessRoute: EmergencyAccessRoute,
   EvidenceRoute: EvidenceRoute,
@@ -407,6 +448,7 @@ const rootRouteChildren: RootRouteChildren = {
   HoneyPackRoute: HoneyPackRoute,
   IncidentNotesRoute: IncidentNotesRoute,
   JoinRoute: JoinRoute,
+  OwnerSetupRoute: OwnerSetupRoute,
   RecoveryRoute: RecoveryRoute,
   ResetPasswordRoute: ResetPasswordRoute,
   RoadmapRoute: RoadmapRoute,
