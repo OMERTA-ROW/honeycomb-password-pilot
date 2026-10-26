@@ -1,31 +1,37 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
-import { useServerFn } from "@tanstack/react-start";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import { VaultShell, PageHead, meta } from "@/components/VaultShell";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
-import { bootstrapOwner } from "@/lib/testing.functions";
 import { hashInvitation } from "@/lib/invitation-policy";
-export const Route = createFileRoute("/join")({ head: () => meta("Accept private invitation", "Verified invitation-only testing for Honeycomb Vault. No real vault secrets."), component: Join });
+import { useAccount } from "@/hooks/use-account";
+export const Route = createFileRoute("/join")({ head: () => meta("Accept private invitation", "Single-use private testing invitations for Honeycomb Vault."), component: Join });
 function Join() {
-  const [code, setCode] = useState(""); const [password, setPassword] = useState(""); const [message, setMessage] = useState(""); const [busy,setBusy]=useState(false);
-  const bootstrap = useServerFn(bootstrapOwner);
+  const [code, setCode] = useState(""); const [password, setPassword] = useState(""); const [confirm, setConfirm] = useState(""); const [providerToken,setProviderToken] = useState(""); const [message,setMessage] = useState(""); const [busy,setBusy] = useState(false);
+  const { refresh } = useAccount(); const navigate = useNavigate();
+  useEffect(() => { const f = new URLSearchParams(window.location.hash.slice(1)); setCode(f.get("code") ?? ""); setProviderToken(f.get("invite") ?? ""); if (window.location.hash) history.replaceState(null, "", "/join"); }, []);
   async function accept() {
-    setBusy(true);
+    setBusy(true); setMessage("");
     try {
-      const identity = await supabase.auth.getUser();
-      if (!identity.data.user?.email_confirmed_at) { setMessage("Open your account invitation email or sign in to your verified account first."); return; }
-      const result = await supabase.rpc("accept_testing_invitation", { invite_token_hash: await hashInvitation(code.trim()) });
-      if (result.error) { setMessage("Invitation unavailable: it may be expired, revoked, used or assigned to another verified account."); return; }
-      if (password) {
+      if (providerToken) {
+        if (password.length < 12 || password !== confirm) { setMessage("Use matching account passwords of at least 12 characters."); return; }
+        const verified = await supabase.auth.verifyOtp({ token_hash: providerToken, type: "invite" });
+        if (verified.error) { setMessage("Account invitation invalid, used or expired. Request a new private link."); return; }
+        setProviderToken("");
         const saved = await supabase.auth.updateUser({ password });
-        if (saved.error) { setMessage("Membership accepted; password setup was not confirmed. Use account recovery before signing in again."); return; }
+        setPassword(""); setConfirm("");
+        if (saved.error) { setMessage("Password setup failed. Use account recovery; membership has not been accepted."); return; }
       }
-      setCode("");setPassword("");setMessage("Invitation accepted. Open your private account.");
+      const identity = await supabase.auth.getUser();
+      if (!identity.data.user?.email_confirmed_at) { setMessage("Sign in with the verified email this invitation belongs to, then accept the code."); return; }
+      const result = await supabase.rpc("accept_testing_invitation", { invite_token_hash: await hashInvitation(code.trim()) });
+      if (result.error) { setMessage("Invitation unavailable: expired, revoked, used, or assigned to another email."); return; }
+      setCode(""); await refresh(); await navigate({ to: "/dashboard", replace: true });
     } catch { setMessage("Invitation could not be accepted."); } finally { setBusy(false); }
   }
-  return <VaultShell accountMode><PageHead title="Private testing invitation" sub="Verified account access only. Invitation codes are single-use and must match your confirmed email." />
-    <div className="max-w-lg space-y-4"><label className="block text-sm">One-time invitation code<input value={code} onChange={e=>setCode(e.target.value)} autoComplete="off" className="mt-1 w-full rounded-md border bg-background p-2" /></label><label className="block text-sm">New account password (email invitation setup only)<input type="password" autoComplete="new-password" value={password} onChange={e=>setPassword(e.target.value)} className="mt-1 w-full rounded-md border bg-background p-2" /></label><Button disabled={busy || !code} onClick={accept}>Accept invitation</Button><Button asChild variant="outline"><Link to="/auth">Sign in</Link></Button><Button asChild variant="outline"><Link to="/account">Open private account</Link></Button>
-    <div className="border-t pt-4"><h2 className="mb-2 font-medium">Verified owner setup</h2><p className="mb-3 text-xs text-muted-foreground">Requires a verified account matching trusted owner configuration. Never assigns ownership to the first visitor.</p><Button variant="outline" disabled={busy} onClick={async()=>{setBusy(true);try{setMessage((await bootstrap()).message);}catch{setMessage("Sign in to your verified, configured owner account first.");}finally{setBusy(false);}}}>Verify configured owner</Button></div>{message && <p role="status" className="text-warning">{message}</p>}</div>
-  </VaultShell>;
+  return <VaultShell accountMode><PageHead title="Accept private invitation" sub="Each tester uses their own account. Invitation links are private, email-bound and single-use; no shared credentials." /><div className="max-w-lg space-y-4">
+    <label className="block text-sm">One-time invitation code<input value={code} onChange={e => setCode(e.target.value)} autoComplete="off" className="mt-1 w-full rounded-md border bg-background p-2" /></label>
+    {providerToken && <><label className="block text-sm">Create account password<input type="password" minLength={12} autoComplete="new-password" value={password} onChange={e => setPassword(e.target.value)} className="mt-1 w-full rounded-md border bg-background p-2" /></label><label className="block text-sm">Confirm account password<input type="password" autoComplete="new-password" value={confirm} onChange={e => setConfirm(e.target.value)} className="mt-1 w-full rounded-md border bg-background p-2" /></label></>}
+    <Button disabled={busy || !code} onClick={accept}>{busy ? "Checking…" : "Accept invitation"}</Button><Button asChild variant="outline"><Link to="/auth" search={{ returnTo: "/join", recovery: false }}>Sign in to existing account</Link></Button>{message && <p role="status" className="text-warning">{message}</p>}
+    </div></VaultShell>;
 }
