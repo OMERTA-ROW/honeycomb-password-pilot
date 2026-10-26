@@ -19,11 +19,13 @@ import { Route as EvidenceRouteImport } from './routes/evidence'
 import { Route as HealthRouteImport } from './routes/health'
 import { Route as HoneyPackRouteImport } from './routes/honey-pack'
 import { Route as IncidentNotesRouteImport } from './routes/incident-notes'
+import { Route as JoinRouteImport } from './routes/join'
 import { Route as RecoveryRouteImport } from './routes/recovery'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as RoadmapRouteImport } from './routes/roadmap'
 import { Route as SecurityModelRouteImport } from './routes/security-model'
 import { Route as SpamShieldRouteImport } from './routes/spam-shield'
+import { Route as TestingRouteImport } from './routes/testing'
 import { Route as WalletProtectionRouteImport } from './routes/wallet-protection'
 
 const IndexRoute = IndexRouteImport.update({
@@ -76,6 +78,11 @@ const IncidentNotesRoute = IncidentNotesRouteImport.update({
   path: '/incident-notes',
   getParentRoute: () => rootRouteImport,
 } as any)
+const JoinRoute = JoinRouteImport.update({
+  id: '/join',
+  path: '/join',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RecoveryRoute = RecoveryRouteImport.update({
   id: '/recovery',
   path: '/recovery',
@@ -101,6 +108,11 @@ const SpamShieldRoute = SpamShieldRouteImport.update({
   path: '/spam-shield',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TestingRoute = TestingRouteImport.update({
+  id: '/testing',
+  path: '/testing',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const WalletProtectionRoute = WalletProtectionRouteImport.update({
   id: '/wallet-protection',
   path: '/wallet-protection',
@@ -118,11 +130,13 @@ export interface FileRoutesByFullPath {
   '/health': typeof HealthRoute
   '/honey-pack': typeof HoneyPackRoute
   '/incident-notes': typeof IncidentNotesRoute
+  '/join': typeof JoinRoute
   '/recovery': typeof RecoveryRoute
   '/reset-password': typeof ResetPasswordRoute
   '/roadmap': typeof RoadmapRoute
   '/security-model': typeof SecurityModelRoute
   '/spam-shield': typeof SpamShieldRoute
+  '/testing': typeof TestingRoute
   '/wallet-protection': typeof WalletProtectionRoute
 }
 export interface FileRoutesByTo {
@@ -136,11 +150,13 @@ export interface FileRoutesByTo {
   '/health': typeof HealthRoute
   '/honey-pack': typeof HoneyPackRoute
   '/incident-notes': typeof IncidentNotesRoute
+  '/join': typeof JoinRoute
   '/recovery': typeof RecoveryRoute
   '/reset-password': typeof ResetPasswordRoute
   '/roadmap': typeof RoadmapRoute
   '/security-model': typeof SecurityModelRoute
   '/spam-shield': typeof SpamShieldRoute
+  '/testing': typeof TestingRoute
   '/wallet-protection': typeof WalletProtectionRoute
 }
 export interface FileRoutesById {
@@ -155,11 +171,13 @@ export interface FileRoutesById {
   '/health': typeof HealthRoute
   '/honey-pack': typeof HoneyPackRoute
   '/incident-notes': typeof IncidentNotesRoute
+  '/join': typeof JoinRoute
   '/recovery': typeof RecoveryRoute
   '/reset-password': typeof ResetPasswordRoute
   '/roadmap': typeof RoadmapRoute
   '/security-model': typeof SecurityModelRoute
   '/spam-shield': typeof SpamShieldRoute
+  '/testing': typeof TestingRoute
   '/wallet-protection': typeof WalletProtectionRoute
 }
 export interface FileRouteTypes {
@@ -175,11 +193,13 @@ export interface FileRouteTypes {
     | '/health'
     | '/honey-pack'
     | '/incident-notes'
+    | '/join'
     | '/recovery'
     | '/reset-password'
     | '/roadmap'
     | '/security-model'
     | '/spam-shield'
+    | '/testing'
     | '/wallet-protection'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -193,11 +213,13 @@ export interface FileRouteTypes {
     | '/health'
     | '/honey-pack'
     | '/incident-notes'
+    | '/join'
     | '/recovery'
     | '/reset-password'
     | '/roadmap'
     | '/security-model'
     | '/spam-shield'
+    | '/testing'
     | '/wallet-protection'
   id:
     | '__root__'
@@ -211,11 +233,13 @@ export interface FileRouteTypes {
     | '/health'
     | '/honey-pack'
     | '/incident-notes'
+    | '/join'
     | '/recovery'
     | '/reset-password'
     | '/roadmap'
     | '/security-model'
     | '/spam-shield'
+    | '/testing'
     | '/wallet-protection'
   fileRoutesById: FileRoutesById
 }
@@ -230,11 +254,13 @@ export interface RootRouteChildren {
   HealthRoute: typeof HealthRoute
   HoneyPackRoute: typeof HoneyPackRoute
   IncidentNotesRoute: typeof IncidentNotesRoute
+  JoinRoute: typeof JoinRoute
   RecoveryRoute: typeof RecoveryRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
   RoadmapRoute: typeof RoadmapRoute
   SecurityModelRoute: typeof SecurityModelRoute
   SpamShieldRoute: typeof SpamShieldRoute
+  TestingRoute: typeof TestingRoute
   WalletProtectionRoute: typeof WalletProtectionRoute
 }
 
@@ -310,6 +336,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IncidentNotesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/join': {
+      id: '/join'
+      path: '/join'
+      fullPath: '/join'
+      preLoaderRoute: typeof JoinRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/recovery': {
       id: '/recovery'
       path: '/recovery'
@@ -345,6 +378,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SpamShieldRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/testing': {
+      id: '/testing'
+      path: '/testing'
+      fullPath: '/testing'
+      preLoaderRoute: typeof TestingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/wallet-protection': {
       id: '/wallet-protection'
       path: '/wallet-protection'
@@ -366,11 +406,13 @@ const rootRouteChildren: RootRouteChildren = {
   HealthRoute: HealthRoute,
   HoneyPackRoute: HoneyPackRoute,
   IncidentNotesRoute: IncidentNotesRoute,
+  JoinRoute: JoinRoute,
   RecoveryRoute: RecoveryRoute,
   ResetPasswordRoute: ResetPasswordRoute,
   RoadmapRoute: RoadmapRoute,
   SecurityModelRoute: SecurityModelRoute,
   SpamShieldRoute: SpamShieldRoute,
+  TestingRoute: TestingRoute,
   WalletProtectionRoute: WalletProtectionRoute,
 }
 export const routeTree = rootRouteImport
