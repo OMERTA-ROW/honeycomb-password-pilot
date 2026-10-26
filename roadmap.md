@@ -1,5 +1,10 @@
 # Implementation checklist
 
+## Private installation and updates (owner, 2026-10-26)
+- [ ] Manifest, local icons, Install / Updates screen, guarded generated worker and explicit reload.
+- [ ] Verify safety rules, browser flow and automatic build; document real links/native availability.
+- [ ] Installed offline/update end-to-end — blocked on approved stable non-preview HTTPS origin; do not publish.
+
 ## Spam Shield (owner, 2026-10-25)
 - [x] Sample-only quarantine, sender rules, protected messages, channel controls and explicit safe unsubscribe; /spam-shield and 10 policy tests.
 - [x] Optional Quiet Mode and reduced-motion-aware mechanical hive visual; opt-in short playback, static with reduced motion.
