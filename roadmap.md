@@ -1,6 +1,8 @@
 # Implementation checklist
 
 ## Private installation and updates (owner, 2026-10-26)
+- [ ] PRIORITY: real invitation-only membership, securely bootstrapped owner, expiring/revocable/single-use invitations, server roles and isolated non-secret test records; disable public signup.
+- [ ] Verify owner/member restrictions, invitation lifecycle, isolation/session denial and actual provider quotas; keep encryption/real-secret entry gated.
 - [ ] Manifest, local icons, Install / Updates screen, guarded generated worker and explicit reload.
 - [ ] Verify safety rules, browser flow and automatic build; document real links/native availability.
 - [ ] Installed offline/update end-to-end — blocked on approved stable non-preview HTTPS origin; do not publish.

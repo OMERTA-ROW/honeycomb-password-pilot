@@ -22,6 +22,13 @@
       "when": 1792967870617,
       "tag": "0002_profile_preferences",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1793033450556,
+      "tag": "0003_private_testing_membership",
+      "breakpoints": true
     }
   ]
 }
