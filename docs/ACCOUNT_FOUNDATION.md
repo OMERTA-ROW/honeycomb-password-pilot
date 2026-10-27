@@ -1,3 +1,23 @@
+# Private account completion — 2026-10-27
+
+## Current result (supersedes older evidence below)
+- Root now mounts the existing AccountProvider: real identity/membership/session state reaches every page. Fixed typed private-return navigation and all current preview errors. Existing dashboard, non-secret records, profile preferences and owner administration are preserved.
+- Membership links no longer contain provider account-activation tokens. Possession of a copied link is not treated as independent mailbox proof. Sign in on Join without leaving it; failed sign-in retains the invitation in memory and clears the password. Leaving/reloading requires reopening the original link. New users require trusted account provisioning and independent confirmation; no emails sent here.
+- Owner bootstrap checks the configured confirmed identity; unique owner index already exists. Configuration alone is not verification. Missing VAULT_OWNER_EMAIL and zero existing accounts/owners were confirmed. No owner assigned, no fixture created.
+- Private Account/Testing controls require an active registered session. Denied sessions can still sign out. Recovery opens correctly from Account; reset first registers the recovery session and revokes other registered app sessions, then changes the password and revokes/signs out the current session. Failures do not claim complete invalidation. Recovery success remains untested.
+- 67 local tests passed; shared-backend integration skipped. Added owner identity/role rules and five fixture-isolation preflight tests. The existing integration test now enrolls disposable members and refuses writes without explicitly distinct matching runtime bindings.
+- Browser: seven account pages rendered without page errors; signed-out dashboard/account/testing denied private controls, owner setup blocked, invalid recovery denied. Join invalid sign-in preserved the code, removed the URL fragment and cleared the password; screenshot inspected. This is NOT authenticated end-to-end evidence.
+- Hosted settings read: public signup disabled, email confirmation required, email and Google enabled. No delivery, quota or social round-trip claim. Automatic preview diagnostics reported build OK after navigation fixes.
+
+## Exact remaining blockers / next actions
+1. In this project's editor, More → Settings → Secrets: enter VAULT_OWNER_EMAIL privately. Trusted account setup must provision the matching identity and independently verify email control, then sign in and run /owner-setup. No passwords/tokens/documents in chat.
+2. Both the previous draft and newly created “Verified private account test environment” share main's Live backend. Supported backend metadata and actual server/client bindings match. No isolated provisioning capability was available in these drafts; no fixtures or shared schema/data changes were made. Provide an actual separate Cloud test environment with independently verified backend identity before authenticated lifecycle/isolation fixtures.
+3. Review identified database hardening still required, deliberately NOT applied to the shared backend: transactional owner bootstrap+audit; transactional invite issuance+permission check; acceptance revalidation of the inviter's role for admin grants; coordinated session registration/membership removal to avoid reactivation races. Existing acceptance already locks the invitation and atomically enforces single-use/expiry/revocation/email binding. These findings prevent claiming accounts are fully security-validated.
+4. Owner/member/admin end-to-end administration, invitation acceptance/replay/revocation, cross-user isolation after membership changes, successful confirmation/recovery and social sign-in remain unverified under current invitation-only rules. Older pre-membership account checks below are historical, not proof of this release.
+5. Real encrypted Vault persistence/key derivation/key management remain unbuilt and independently unaudited; real credential entry stays blocked. Omni web access is separate from its offline CLI: no CLI login implementation or verification exists in this project. No cross-project credentials or SSO.
+
+## Historical foundation evidence (before invitation-only membership)
+
 # Real account foundation — status and verification
 
 Owner requested real accounts on 2026-10-25 and confirmed basic profiles. Lovable Cloud provisioning succeeded through the supported tool flow; no publishing or external account changes. Demo vault/wallet samples remain static and separate from real profiles. Authentication is not encryption; no real vault secrets accepted.

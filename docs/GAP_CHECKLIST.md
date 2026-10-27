@@ -126,3 +126,13 @@ Evidence references: `src/lib/batch.test.ts` (9 tests), `src/lib/incident-notes.
 | Optional mechanical gold hive, silver/gold bees and fading cells | IMPL (visual) | Opt-in short SVG playback, static with reduced motion; not integration health |
 | Protection active only after real health verification | DOC / UNBUILT | Demo always not connected; future per-channel freshness/permission/readback gate in SPAM_SHIELD.md |
 | Native SMS/email integration and cross-device behavior | DOC / UNBUILT / BLOCKED | Primary platform/provider prerequisites recorded; no services connected, native artifacts, cross-device sync or boot overlay |
+
+## Private membership completion (2026-10-27)
+| Requirement | Status | Evidence / blocker |
+|---|---|---|
+| Shared real account state, private navigation, denied-session controls | IMPL (public/failure checks) | AccountProvider mounted at root; seven public/failure flows browser checked; 67 local tests |
+| Configured independently confirmed owner, invitation-only multiple accounts | CODE / BLOCKED | Missing private owner configuration and provisioned verified identity; no arbitrary first-owner assignment |
+| Single-use email-bound invitation + roles/revocation/non-secret isolation | CODE / UNVERIFIED | Existing locked SQL acceptance preserved; membership-only links; no provider activation token; transactional authority hardening remains |
+| Authenticated lifecycle/isolation tests | BLOCKED | Both drafts share Live backend; fixtures refused; older pre-membership tests are not current evidence |
+| Recovery session invalidation | CODE / UNVERIFIED | Revoke other registered sessions before password update, current session after; successful recovery untested |
+| Omni offline CLI login | UNBUILT (separate project) | Web account access is not evidence of offline CLI support |

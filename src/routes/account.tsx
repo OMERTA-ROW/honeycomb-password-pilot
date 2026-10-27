@@ -52,15 +52,14 @@ function AccountPage() {
     } catch { setMessage(accountError()); } finally { setBusy(false); }
   }
   async function signOut() {
-    if (!sessionId) return;
     setBusy(true);
     try {
-      const revoked = await supabase.rpc("revoke_account_session", { target_id: sessionId });
-      if (revoked.error) { setMessage("Session revocation failed. Try again; sign-out is not confirmed."); return; }
       await client.cancelQueries(); client.clear();
+      const revoked = sessionId ? await supabase.rpc("revoke_account_session", { target_id: sessionId }) : null;
       const result = await supabase.auth.signOut({ scope: "local" });
-      if (result.error) { setMessage("Vault account access revoked, but local sign-out failed. Retry sign-out."); return; }
-      await navigate({ to: "/auth", replace: true });
+      if (result.error) { setMessage("Local sign-out failed. Retry; no success assumed."); return; }
+      if (revoked?.error) setMessage("Local sign-out completed; server revocation was not confirmed.");
+      await navigate({ to: "/auth", search: { returnTo: "/dashboard", recovery: false }, replace: true });
     } catch { setMessage(accountError()); } finally { setBusy(false); }
   }
   async function revoke(id?: string) {
@@ -73,7 +72,7 @@ function AccountPage() {
     } catch { setMessage(accountError()); } finally { setBusy(false); }
   }
   return <VaultShell accountMode><PageHead title="Account & security" sub="Real account settings, separate from Demo vault and wallet records. Signing in does not encrypt or unlock vault contents." />
-    {!ready ? <p>Checking account…</p> : !user ? <div className="space-y-3"><p role="status">{error || "Sign in to access private account records."}</p><Button asChild><Link to="/auth">Sign in / create account</Link></Button></div> : <>
+    {!ready ? <p>Checking account…</p> : !user || !sessionId ? <div className="space-y-3"><p role="status">{error || "Sign in to access private account records."}</p><Button asChild><Link to="/auth" search={{ returnTo: "/dashboard", recovery: false }}>Private sign in</Link></Button>{user && <Button variant="outline" disabled={busy} onClick={signOut}>Sign out</Button>}</div> : <>
       <div className="mb-6 flex flex-wrap items-center justify-between gap-3"><div><p>{user.email}</p><span className="tag-ok">Real account · {user.email_confirmed_at ? "email verified" : "email not verified"}</span></div><Button variant="outline" onClick={signOut} disabled={busy}>Sign out</Button></div>
       {account.isPending ? <p>Loading private account records…</p> : account.isError ? <p role="alert" className="text-warning">Account data unavailable. Your session may be expired or revoked; sign in again.</p> : account.data && <>
         <form onSubmit={save} className="mb-6 max-w-md space-y-3"><label className="block text-sm">Display name<input value={name} maxLength={80} onChange={e => setName(e.target.value)} className="mt-1 block w-full rounded-md border bg-background p-2" autoComplete="nickname" /></label><Button type="submit" disabled={busy}>Save profile</Button></form>
@@ -83,7 +82,7 @@ function AccountPage() {
         <h2 className="mb-3 font-medium">Security activity</h2><ul className="mb-6 space-y-2 text-xs">{account.data.activity.map(a => <li key={a.id} className="flex flex-wrap justify-between gap-2 border-b py-2"><span>{a.event.replaceAll("_", " ")}</span><time className="font-mono text-muted-foreground">{a.occurred_at}</time></li>)}</ul>
         <p className="text-xs text-muted-foreground">Server-timestamped session registration, revocation and profile updates only. This is not a full provider login/failure audit or tamper-evident log. Passwords, tokens and biometric templates are never stored in these records.</p>
       </>}
-      <div className="mt-6 border-t pt-4 text-sm"><h2 className="mb-2 font-medium">Account recovery & security settings</h2><Button asChild variant="outline"><Link to="/auth">Request account password reset</Link></Button><p className="mt-3 text-muted-foreground">Verification and recovery use Cloud account emails. Changing email, MFA, passkeys, password change with current-password verification and profile preferences are queued, not implemented. Vault encryption/recovery decisions remain pending. Terminal shared identity requires separate authorization; no SSO exists.</p></div>
+      <div className="mt-6 border-t pt-4 text-sm"><h2 className="mb-2 font-medium">Account recovery & security settings</h2><Button asChild variant="outline"><Link to="/auth" search={{ recovery: true, returnTo: "/account" }}>Request account password reset</Link></Button><p className="mt-3 text-muted-foreground">Verification and recovery use Cloud account emails. Changing email, MFA, passkeys, password change with current-password verification are queued. Vault encryption/recovery decisions remain pending. Terminal shared identity requires separate authorization; no SSO exists.</p></div>
     </>}{message && <p role="status" className="mt-4 text-warning">{message}</p>}
   </VaultShell>;
 }
