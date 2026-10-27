@@ -13,9 +13,11 @@ export function AccountProvider({ children }: { children: ReactNode }) {
     let active = true; let generation = 0;
     const reload = async () => {
       const current = ++generation;
-      const identity = await supabase.auth.getUser();
+      let identity;
+      try { identity = await supabase.auth.getUser(); }
+      catch { if (active && generation === current) setState({ user: null, ready: true, error: "Account verification unavailable. Try again.", sessionId: null, membership: null }); return; }
       if (!active || generation !== current) return;
-      if (!identity.data.user || identity.error) { setState({ user: null, ready: true, error: "", sessionId: null, membership: null }); return; }
+      if (!identity.data.user || identity.error) { await queryClient.cancelQueries(); queryClient.clear(); setState({ user: null, ready: true, error: "", sessionId: null, membership: null }); return; }
       const role = await supabase.from("user_roles").select("role,active,can_invite").eq("user_id", identity.data.user.id).maybeSingle();
       const registration = role.data?.active ? await supabase.rpc("register_account_session") : null;
       if (!active || generation !== current) return;
