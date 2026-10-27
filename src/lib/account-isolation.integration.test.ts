@@ -1,6 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 import { describe, expect, it } from "vitest";
 import type { Database } from "@/integrations/supabase/types";
+import { requireIsolatedBackend } from "./integration-safety";
 
 // Explicitly enabled against disposable application test users; never logs credentials.
 const enabled = process.env['RUN_ACCOUNT_INTEGRATION'] === "1";
@@ -9,6 +10,7 @@ describe.skipIf(!enabled)("Real account isolation and revocation", () => {
     const url = process.env['SUPABASE_URL'];
     const secret = process.env['SUPABASE_SERVICE_ROLE_KEY'];
     const key = process.env['SUPABASE_PUBLISHABLE_KEY'];
+    requireIsolatedBackend({ serverUrl: url, browserUrl: process.env['VITE_SUPABASE_URL'], isolatedRef: process.env['VERIFIED_ISOLATED_BACKEND_REF'], liveRef: process.env['VERIFIED_LIVE_BACKEND_REF'] });
     if (!url || !secret || !key) throw new Error("Integration configuration missing");
     const admin = createClient<Database>(url, secret, { auth: { storageKey: "test-admin", persistSession: false, autoRefreshToken: false } });
     const anon = createClient<Database>(url, key, { auth: { storageKey: "test-anon", persistSession: false, autoRefreshToken: false } });
@@ -25,6 +27,8 @@ describe.skipIf(!enabled)("Real account isolation and revocation", () => {
         const created = await admin.auth.admin.createUser({ email, password, email_confirm: true });
         if (created.error || !created.data.user) throw new Error("Test user creation failed");
         ids.push(created.data.user.id);
+        const membership = await admin.from("user_roles").insert({ user_id: created.data.user.id, role: "member" });
+        expect(membership.error).toBeNull();
         const signed = await client.auth.signInWithPassword({ email, password });
         expect(signed.error).toBeNull();
         const registered = await client.rpc("register_account_session");
@@ -62,6 +66,8 @@ describe.skipIf(!enabled)("Real account isolation and revocation", () => {
       expect((await clients[0].from("profiles").select("id")).data?.length ?? 0).toBe(0);
     } finally {
       for (const id of ids) {
+        await admin.from("test_records").delete().eq("user_id", id);
+        await admin.from("user_roles").delete().eq("user_id", id);
         await admin.from("account_activity").delete().eq("user_id", id);
         await admin.from("account_sessions").delete().eq("user_id", id);
         await admin.auth.admin.deleteUser(id);
