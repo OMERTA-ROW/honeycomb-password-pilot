@@ -1,5 +1,11 @@
 # Implementation checklist
 
+## Private accounts completion (owner, 2026-10-27)
+- [ ] Finish existing login, owner verification, invitation acceptance, member administration and sign-out/recovery navigation without changing the shared backend.
+- [ ] Add local failure/permission tests and safe integration-test isolation preflight; verify available browser flows and automatic preview diagnostics.
+- [ ] Verify a genuinely separate draft backend before fixtures; otherwise document the backend blocker, trusted owner setup and unapplied security prerequisites.
+- [ ] Keep real Vault secrets blocked and Omni offline CLI outside this web-account implementation.
+
 ## Private installation and updates (owner, 2026-10-26)
 - [ ] Finish existing access integration and natural dashboard/account/invitation navigation; copy-only invitation delivery, trusted owner setup; isolated draft tests only, no mail or production fixtures.
 - [ ] PRIORITY: real invitation-only membership, securely bootstrapped owner, expiring/revocable/single-use invitations, server roles and isolated non-secret test records; disable public signup.
