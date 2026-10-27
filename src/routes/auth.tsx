@@ -9,7 +9,7 @@ import { useAccount } from "@/hooks/use-account";
 import { accountError } from "@/lib/account-policy";
 import { useQueryClient } from "@tanstack/react-query";
 import { safeReturnTo } from "@/lib/access-policy";
-export const Route = createFileRoute("/auth")({ validateSearch: (s: Record<string, unknown>) => ({ returnTo: safeReturnTo(s.returnTo), recovery: s.recovery === true || s.recovery === "true" }), head: () => meta("Private sign in", "Invitation-only Honeycomb Vault accounts. Authentication does not encrypt vault secrets."), component: AuthPage });
+export const Route = createFileRoute("/auth")({ validateSearch: (s: Record<string, unknown>) => ({ returnTo: safeReturnTo(s["returnTo"]), recovery: s["recovery"] === true || s["recovery"] === "true" }), head: () => meta("Private sign in", "Invitation-only Honeycomb Vault accounts. Authentication does not encrypt vault secrets."), component: AuthPage });
 function AuthPage() {
   const { user, ready, error, sessionId, refresh } = useAccount(); const search = Route.useSearch(); const navigate = useNavigate();
   const queryClient = useQueryClient();

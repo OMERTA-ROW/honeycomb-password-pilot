@@ -48,7 +48,7 @@ export function VaultShell({ children, showPromo = false, accountMode = false }:
         </header>
         <div className="vault-layout md:flex">
           <aside className="vault-sidebar min-w-0 border-b md:w-64 md:shrink-0 md:border-b-0 p-4 md:py-6">
-            <Link to={sessionId ? "/dashboard" : "/auth"} className="vault-nav-link mb-3 rounded-md px-3 py-2.5 text-sm text-primary"><UserRound className="h-4 w-4 shrink-0" aria-hidden="true" />{sessionId ? "Private dashboard" : user ? "Account access" : "Private sign in"}</Link>
+            <Link to={sessionId ? "/dashboard" : "/auth"} search={{ returnTo: "/dashboard", recovery: false }} className="vault-nav-link mb-3 rounded-md px-3 py-2.5 text-sm text-primary"><UserRound className="h-4 w-4 shrink-0" aria-hidden="true" />{sessionId ? "Private dashboard" : user ? "Account access" : "Private sign in"}</Link>
             <nav className="flex gap-1.5 overflow-x-auto md:flex-col" aria-label="Vault sections">
               {nav.map((n) => (
                 <Link key={n.to} to={n.to} activeOptions={{ exact: true }}

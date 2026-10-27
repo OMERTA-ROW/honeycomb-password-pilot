@@ -1,5 +1,5 @@
 const sharedBackend = "kqtabwiffhldgcughkln";
-export function requireIsolatedBackend(config: { serverUrl?: string; browserUrl?: string; isolatedRef?: string; liveRef?: string }) {
+export function requireIsolatedBackend(config: { serverUrl?: string | undefined; browserUrl?: string | undefined; isolatedRef?: string | undefined; liveRef?: string | undefined }) {
   const { serverUrl, browserUrl, isolatedRef, liveRef } = config;
   if (!serverUrl || !browserUrl || !isolatedRef || !liveRef) throw new Error("Verified isolated and live backend identities are required before fixtures");
   if (isolatedRef === liveRef || isolatedRef === sharedBackend) throw new Error("Fixtures refused on shared/live backend");

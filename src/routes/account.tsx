@@ -59,7 +59,7 @@ function AccountPage() {
       const result = await supabase.auth.signOut({ scope: "local" });
       if (result.error) { setMessage("Local sign-out failed. Retry; no success assumed."); return; }
       if (revoked?.error) setMessage("Local sign-out completed; server revocation was not confirmed.");
-      await navigate({ to: "/auth", replace: true });
+      await navigate({ to: "/auth", search: { returnTo: "/dashboard", recovery: false }, replace: true });
     } catch { setMessage(accountError()); } finally { setBusy(false); }
   }
   async function revoke(id?: string) {
@@ -72,7 +72,7 @@ function AccountPage() {
     } catch { setMessage(accountError()); } finally { setBusy(false); }
   }
   return <VaultShell accountMode><PageHead title="Account & security" sub="Real account settings, separate from Demo vault and wallet records. Signing in does not encrypt or unlock vault contents." />
-    {!ready ? <p>Checking account…</p> : !user || !sessionId ? <div className="space-y-3"><p role="status">{error || "Sign in to access private account records."}</p><Button asChild><Link to="/auth">Private sign in</Link></Button>{user && <Button variant="outline" disabled={busy} onClick={signOut}>Sign out</Button>}</div> : <>
+    {!ready ? <p>Checking account…</p> : !user || !sessionId ? <div className="space-y-3"><p role="status">{error || "Sign in to access private account records."}</p><Button asChild><Link to="/auth" search={{ returnTo: "/dashboard", recovery: false }}>Private sign in</Link></Button>{user && <Button variant="outline" disabled={busy} onClick={signOut}>Sign out</Button>}</div> : <>
       <div className="mb-6 flex flex-wrap items-center justify-between gap-3"><div><p>{user.email}</p><span className="tag-ok">Real account · {user.email_confirmed_at ? "email verified" : "email not verified"}</span></div><Button variant="outline" onClick={signOut} disabled={busy}>Sign out</Button></div>
       {account.isPending ? <p>Loading private account records…</p> : account.isError ? <p role="alert" className="text-warning">Account data unavailable. Your session may be expired or revoked; sign in again.</p> : account.data && <>
         <form onSubmit={save} className="mb-6 max-w-md space-y-3"><label className="block text-sm">Display name<input value={name} maxLength={80} onChange={e => setName(e.target.value)} className="mt-1 block w-full rounded-md border bg-background p-2" autoComplete="nickname" /></label><Button type="submit" disabled={busy}>Save profile</Button></form>
