@@ -5,5 +5,10 @@ export async function hashInvitation(token: string) {
   return Array.from(new Uint8Array(hash), b => b.toString(16).padStart(2, "0")).join("");
 }
 export function canIssue(role: string, granted: boolean, requested: string) {
-  return role === "owner" || (granted && requested === "member");
+  if (requested !== "admin" && requested !== "member") return false;
+  return role === "owner" || ((role === "admin" || role === "member") && granted && requested === "member");
+}
+export function verifiedOwner(configured: string | undefined, identity: { email?: string; email_confirmed_at?: string } | null) {
+  const email = configured?.trim().toLowerCase();
+  return Boolean(email && identity?.email_confirmed_at && identity.email?.toLowerCase() === email);
 }
