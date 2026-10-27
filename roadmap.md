@@ -1,10 +1,12 @@
 # Implementation checklist
 
 ## Private accounts completion (owner, 2026-10-27)
-- [ ] Finish existing login, owner verification, invitation acceptance, member administration and sign-out/recovery navigation without changing the shared backend.
-- [ ] Add local failure/permission tests and safe integration-test isolation preflight; verify available browser flows and automatic preview diagnostics.
-- [ ] Verify a genuinely separate draft backend before fixtures; otherwise document the backend blocker, trusted owner setup and unapplied security prerequisites.
-- [ ] Keep real Vault secrets blocked and Omni offline CLI outside this web-account implementation.
+- [x] Finish existing account-state mounting, login/invitation/failure navigation, active-session controls and sign-out/recovery code without changing shared backend data/schema; authenticated success unverified.
+- [x] 67 local tests passed; five isolation-preflight tests; seven signed-out pages and invitation failed sign-in checked; automatic build OK.
+- [x] Both drafts verified to share Live; no fixtures. Exact setup and database hardening findings documented in docs/ACCOUNT_FOUNDATION.md.
+- [ ] Missing VAULT_OWNER_EMAIL + independently verified provisioned identity; no owner assigned.
+- [ ] Authenticated invite/role/revocation/isolation and transactional hardening — blocked on verified separate backend; no shared-backend writes.
+- [x] Real Vault secrets blocked; no Omni offline CLI login or cross-project identity claim.
 
 ## Private installation and updates (owner, 2026-10-26)
 - [ ] Finish existing access integration and natural dashboard/account/invitation navigation; copy-only invitation delivery, trusted owner setup; isolated draft tests only, no mail or production fixtures.
