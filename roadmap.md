@@ -65,3 +65,5 @@
 - [ ] Decoy service, device check-ins, Find Nearby, tamper-evident log
 - [x] Incident notes → AI timeline (built, disabled until owner sets INCIDENT_AI_ENABLED=true and authorizes AI Gateway)
 - [ ] Billing (blocked: owner says no paid services yet)
+
+- [x] Autonomous task settings (/autonomy): server-enforced grants, allowlist, pause/stop/revoke, redacted audit. Executor/browser companion: BLOCKED (not connected).
