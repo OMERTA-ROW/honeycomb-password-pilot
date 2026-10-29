@@ -29,6 +29,13 @@
       "when": 1793033450556,
       "tag": "0003_private_testing_membership",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1793278653056,
+      "tag": "0004_autonomy_tasks",
+      "breakpoints": true
     }
   ]
 }

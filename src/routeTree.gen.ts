@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AccountRouteImport } from './routes/account'
 import { Route as AccountsRouteImport } from './routes/accounts'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AutonomyRouteImport } from './routes/autonomy'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as DevicesRouteImport } from './routes/devices'
 import { Route as EmergencyAccessRouteImport } from './routes/emergency-access'
@@ -48,6 +49,11 @@ const AccountsRoute = AccountsRouteImport.update({
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AutonomyRoute = AutonomyRouteImport.update({
+  id: '/autonomy',
+  path: '/autonomy',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DashboardRoute = DashboardRouteImport.update({
@@ -136,6 +142,7 @@ export interface FileRoutesByFullPath {
   '/account': typeof AccountRoute
   '/accounts': typeof AccountsRoute
   '/auth': typeof AuthRoute
+  '/autonomy': typeof AutonomyRoute
   '/dashboard': typeof DashboardRoute
   '/devices': typeof DevicesRoute
   '/emergency-access': typeof EmergencyAccessRoute
@@ -158,6 +165,7 @@ export interface FileRoutesByTo {
   '/account': typeof AccountRoute
   '/accounts': typeof AccountsRoute
   '/auth': typeof AuthRoute
+  '/autonomy': typeof AutonomyRoute
   '/dashboard': typeof DashboardRoute
   '/devices': typeof DevicesRoute
   '/emergency-access': typeof EmergencyAccessRoute
@@ -181,6 +189,7 @@ export interface FileRoutesById {
   '/account': typeof AccountRoute
   '/accounts': typeof AccountsRoute
   '/auth': typeof AuthRoute
+  '/autonomy': typeof AutonomyRoute
   '/dashboard': typeof DashboardRoute
   '/devices': typeof DevicesRoute
   '/emergency-access': typeof EmergencyAccessRoute
@@ -205,6 +214,7 @@ export interface FileRouteTypes {
     | '/account'
     | '/accounts'
     | '/auth'
+    | '/autonomy'
     | '/dashboard'
     | '/devices'
     | '/emergency-access'
@@ -227,6 +237,7 @@ export interface FileRouteTypes {
     | '/account'
     | '/accounts'
     | '/auth'
+    | '/autonomy'
     | '/dashboard'
     | '/devices'
     | '/emergency-access'
@@ -249,6 +260,7 @@ export interface FileRouteTypes {
     | '/account'
     | '/accounts'
     | '/auth'
+    | '/autonomy'
     | '/dashboard'
     | '/devices'
     | '/emergency-access'
@@ -272,6 +284,7 @@ export interface RootRouteChildren {
   AccountRoute: typeof AccountRoute
   AccountsRoute: typeof AccountsRoute
   AuthRoute: typeof AuthRoute
+  AutonomyRoute: typeof AutonomyRoute
   DashboardRoute: typeof DashboardRoute
   DevicesRoute: typeof DevicesRoute
   EmergencyAccessRoute: typeof EmergencyAccessRoute
@@ -318,6 +331,13 @@ declare module '@tanstack/react-router' {
       path: '/auth'
       fullPath: '/auth'
       preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/autonomy': {
+      id: '/autonomy'
+      path: '/autonomy'
+      fullPath: '/autonomy'
+      preLoaderRoute: typeof AutonomyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/dashboard': {
@@ -440,6 +460,7 @@ const rootRouteChildren: RootRouteChildren = {
   AccountRoute: AccountRoute,
   AccountsRoute: AccountsRoute,
   AuthRoute: AuthRoute,
+  AutonomyRoute: AutonomyRoute,
   DashboardRoute: DashboardRoute,
   DevicesRoute: DevicesRoute,
   EmergencyAccessRoute: EmergencyAccessRoute,

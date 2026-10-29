@@ -65,6 +65,103 @@ export type Database = {
         }
         Relationships: []
       }
+      autonomy_events: {
+        Row: {
+          actor_id: string
+          detail: string
+          event: string
+          id: string
+          occurred_at: string
+          task_id: string | null
+          user_id: string
+        }
+        Insert: {
+          actor_id: string
+          detail?: string
+          event: string
+          id?: string
+          occurred_at?: string
+          task_id?: string | null
+          user_id: string
+        }
+        Update: {
+          actor_id?: string
+          detail?: string
+          event?: string
+          id?: string
+          occurred_at?: string
+          task_id?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      autonomy_grants: {
+        Row: {
+          granted_at: string
+          granted_by: string
+          revoked_at: string | null
+          user_id: string
+        }
+        Insert: {
+          granted_at?: string
+          granted_by: string
+          revoked_at?: string | null
+          user_id: string
+        }
+        Update: {
+          granted_at?: string
+          granted_by?: string
+          revoked_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "autonomy_grants_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      autonomy_tasks: {
+        Row: {
+          capabilities: string[]
+          created_at: string
+          id: string
+          status: string
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          capabilities: string[]
+          created_at?: string
+          id?: string
+          status?: string
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          capabilities?: string[]
+          created_at?: string
+          id?: string
+          status?: string
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "autonomy_tasks_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           created_at: string
@@ -225,6 +322,12 @@ export type Database = {
         Returns: undefined
       }
       account_session_active: { Args: never; Returns: boolean }
+      autonomy_authorized: { Args: never; Returns: boolean }
+      autonomy_redact: { Args: { input: string }; Returns: string }
+      create_autonomy_task: {
+        Args: { task_capabilities: string[]; task_title: string }
+        Returns: string
+      }
       manage_testing_member: {
         Args: {
           invite_permission: boolean
@@ -242,6 +345,14 @@ export type Database = {
       revoke_other_account_sessions: { Args: never; Returns: undefined }
       revoke_testing_invitation: {
         Args: { target_invite: string }
+        Returns: undefined
+      }
+      set_autonomy_grant: {
+        Args: { allowed: boolean; target_user: string }
+        Returns: undefined
+      }
+      set_autonomy_task_status: {
+        Args: { new_status: string; target_task: string }
         Returns: undefined
       }
       testing_inviter: { Args: never; Returns: boolean }
