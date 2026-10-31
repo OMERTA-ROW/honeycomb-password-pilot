@@ -1,5 +1,17 @@
 # Honeycomb Vault — Requirement Gap Checklist
 
+## Family Guardian addendum (2026-10-31)
+| Requirement | Status | Evidence / gate |
+|---|---|---|
+| Optional family dashboard/profiles/settings and shared age-appropriate safeguards | SIM | /family-guardian; fictional aliases and age bands, off by default, transient state |
+| Guardian consent, child transparency, device invite/accept/revoke | SIM / BLOCKED (real) | Acknowledgments gate simulated linking; real authority/consent, enrollment and family RLS unbuilt |
+| Review-before-blocking or high-confidence supported threat blocking | SIM | Pure family-guardian-demo policy; uncertain/unsupported risks never auto-block |
+| Spam/phishing/link/contact-pattern and payment risk alerts | SIM / UNBUILT (real) | Fixed fictional scenarios; no person attribution, message inspection or payment control |
+| Minimal parent notifications, child warnings, evidence/report review | SIM | Generic notification, supportive warning, unsigned fictional summary download; no report sent |
+| Encryption, strong family access, retention/deletion, transparent permissions | DESIGN / BLOCKED | No real child data accepted; independent review and implementation needed |
+| No child-data sale/transfer to JAX/data brokers; no covert surveillance | CONSTRAINT / preview boundary | No network calls, persistence, AI or personal-data inputs in module |
+| iOS/Android/provider capability and integration health | DOC / UNBUILT | docs/FAMILY_GUARDIAN.md; no universal access or active status |
+
 Source: canonical Notion "Honeycomb Vault — Product Plan" as pasted by the owner on 2026-10-24 (agent did not access the private link). Later decisions take precedence over earlier scope.
 
 Status key: **IMPL** = works in preview (evidence: tests/browser) · **SIM** = simulated with sample data, labelled · **DOC** = disclosed as a limit/guidance text only · **UNBUILT** = not started · **BLOCKED** = needs an owner input or review first.

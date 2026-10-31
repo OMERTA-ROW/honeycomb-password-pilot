@@ -1,5 +1,8 @@
 # Next Implementation Plan — Sign-in, Vault Encryption, Key Management, Recovery
 
+## Family Guardian security gate (2026-10-31)
+The optional module is fictional/page-memory only; existing account identity does not authorize access to child data. Before real enrollment: verify guardian authority and age/jurisdiction-specific consent and child transparency; enforce dedicated family membership and per-child/per-capability authorization with active-session/revocation checks; test unrelated families and restricted guardians cannot read/write; isolate from vault/Omni/JAX. Use reviewed platform/vetted encryption and family key distribution, recovery/removal, ciphertext storage and minimal metadata; no custom crypto. Define retention/deletion, child access/help paths, privacy-safe event allowlist and independent child-safety/security review. No message bodies in logs, notifications, analytics or model prompts; no child-data sale/transfer to JAX/data brokers. Native/provider eligibility, action readback and health tests are mandatory; permissions/preferences alone never prove protection. Real child data, evidence and controls remain blocked. See FAMILY_GUARDIAN.md.
+
 Status: **VAULT CRYPTO PLAN ONLY.** Real account identity was later added (see §9), but encrypted vault/native enrollment/recovery foundations remain unbuilt. Vault preview stays sample-data-only and accepts no real vault passwords until every gate below passes.
 
 ## 0. Principle
