@@ -1,5 +1,11 @@
 # Implementation checklist
 
+## Family Guardian (owner, 2026-10-31)
+- [x] Optional off-by-default /family-guardian preview; fictional aliases/age bands, consent acknowledgments, simulated invitation/accept/revoke, review/automatic sample safeguards, risk review, child warnings, minimal notifications and fictional evidence summary.
+- [x] Preserve Vault functionality/theme; no real child inputs, persistence, integrations, AI, mail, account/schema changes or publishing.
+- [x] 11 new policy tests plus 25 existing spam/access/autonomy tests passed; automatic build OK. Browser consent/invite/accept/revoke, automatic versus explicit blocking, notification pause, child warning, summary download and reset passed at 1280/834/390/320 with no page errors/overflow. Real integrations/security remain unverified.
+- [ ] Real family membership/access controls, verified guardianship/consent, device enrollment, encryption/key recovery, retention/deletion and threat/payment/provider integrations — blocked on platform selection, independent security/child-safety review and supported native implementation.
+
 ## Private accounts completion (owner, 2026-10-27)
 - [x] Finish existing account-state mounting, login/invitation/failure navigation, active-session controls and sign-out/recovery code without changing shared backend data/schema; authenticated success unverified.
 - [x] 67 local tests passed; five isolation-preflight tests; seven signed-out pages and invitation failed sign-in checked; automatic build OK.

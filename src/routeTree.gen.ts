@@ -18,6 +18,7 @@ import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as DevicesRouteImport } from './routes/devices'
 import { Route as EmergencyAccessRouteImport } from './routes/emergency-access'
 import { Route as EvidenceRouteImport } from './routes/evidence'
+import { Route as FamilyGuardianRouteImport } from './routes/family-guardian'
 import { Route as HealthRouteImport } from './routes/health'
 import { Route as HoneyPackRouteImport } from './routes/honey-pack'
 import { Route as IncidentNotesRouteImport } from './routes/incident-notes'
@@ -74,6 +75,11 @@ const EmergencyAccessRoute = EmergencyAccessRouteImport.update({
 const EvidenceRoute = EvidenceRouteImport.update({
   id: '/evidence',
   path: '/evidence',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FamilyGuardianRoute = FamilyGuardianRouteImport.update({
+  id: '/family-guardian',
+  path: '/family-guardian',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HealthRoute = HealthRouteImport.update({
@@ -147,6 +153,7 @@ export interface FileRoutesByFullPath {
   '/devices': typeof DevicesRoute
   '/emergency-access': typeof EmergencyAccessRoute
   '/evidence': typeof EvidenceRoute
+  '/family-guardian': typeof FamilyGuardianRoute
   '/health': typeof HealthRoute
   '/honey-pack': typeof HoneyPackRoute
   '/incident-notes': typeof IncidentNotesRoute
@@ -170,6 +177,7 @@ export interface FileRoutesByTo {
   '/devices': typeof DevicesRoute
   '/emergency-access': typeof EmergencyAccessRoute
   '/evidence': typeof EvidenceRoute
+  '/family-guardian': typeof FamilyGuardianRoute
   '/health': typeof HealthRoute
   '/honey-pack': typeof HoneyPackRoute
   '/incident-notes': typeof IncidentNotesRoute
@@ -194,6 +202,7 @@ export interface FileRoutesById {
   '/devices': typeof DevicesRoute
   '/emergency-access': typeof EmergencyAccessRoute
   '/evidence': typeof EvidenceRoute
+  '/family-guardian': typeof FamilyGuardianRoute
   '/health': typeof HealthRoute
   '/honey-pack': typeof HoneyPackRoute
   '/incident-notes': typeof IncidentNotesRoute
@@ -219,6 +228,7 @@ export interface FileRouteTypes {
     | '/devices'
     | '/emergency-access'
     | '/evidence'
+    | '/family-guardian'
     | '/health'
     | '/honey-pack'
     | '/incident-notes'
@@ -242,6 +252,7 @@ export interface FileRouteTypes {
     | '/devices'
     | '/emergency-access'
     | '/evidence'
+    | '/family-guardian'
     | '/health'
     | '/honey-pack'
     | '/incident-notes'
@@ -265,6 +276,7 @@ export interface FileRouteTypes {
     | '/devices'
     | '/emergency-access'
     | '/evidence'
+    | '/family-guardian'
     | '/health'
     | '/honey-pack'
     | '/incident-notes'
@@ -289,6 +301,7 @@ export interface RootRouteChildren {
   DevicesRoute: typeof DevicesRoute
   EmergencyAccessRoute: typeof EmergencyAccessRoute
   EvidenceRoute: typeof EvidenceRoute
+  FamilyGuardianRoute: typeof FamilyGuardianRoute
   HealthRoute: typeof HealthRoute
   HoneyPackRoute: typeof HoneyPackRoute
   IncidentNotesRoute: typeof IncidentNotesRoute
@@ -366,6 +379,13 @@ declare module '@tanstack/react-router' {
       path: '/evidence'
       fullPath: '/evidence'
       preLoaderRoute: typeof EvidenceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/family-guardian': {
+      id: '/family-guardian'
+      path: '/family-guardian'
+      fullPath: '/family-guardian'
+      preLoaderRoute: typeof FamilyGuardianRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/health': {
@@ -465,6 +485,7 @@ const rootRouteChildren: RootRouteChildren = {
   DevicesRoute: DevicesRoute,
   EmergencyAccessRoute: EmergencyAccessRoute,
   EvidenceRoute: EvidenceRoute,
+  FamilyGuardianRoute: FamilyGuardianRoute,
   HealthRoute: HealthRoute,
   HoneyPackRoute: HoneyPackRoute,
   IncidentNotesRoute: IncidentNotesRoute,
